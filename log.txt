@@ -1,0 +1,6 @@
+Author: yuliya adamskaya <yuli.adamskaya@gmail.com>
+Date:   Wed Feb 7 23:31:44 2018 +0300
+add task1/status.txt
+Author: yuliya adamskaya <yuli.adamskaya@gmail.com>
+Date:   Wed Feb 7 23:25:59 2018 +0300
+add .gitignore
