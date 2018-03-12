@@ -14,14 +14,14 @@ a {
 
 img {
     width: 100%;
-    height: 11;
+    height: auto;
 }
 
 body {
     margin: 0 auto;
     width: 77%;
     font-family: 'Crimson Text', sans-serif;
-    background: #F2F2F2;
+    background: url("images/body.jpg");
 }
 
 @media (max-width: 680px) {
@@ -33,19 +33,18 @@ body {
 /* Header */
 header {
     display: block;
-    background: #F2F2F2;
 }
 
 .logo {
     text-align: center;
     font-family: 'Dancing Script', cursive;
     font-size: 8.5vw;
-    color: #333;
+    color: #000;
     font-weight: bold;
     display: block;
-    line-height: 1.5;
-    padding: 1.5vw 0 1.5vw;
-    background: #F2F2F2;
+    line-height: 1.7;
+    background: #f3f3f4;
+    opacity: 0.8;
 }
 
 /* Menu */
@@ -79,24 +78,9 @@ header {
 }
 
 /* форма поиска */
-input, button, select {
+input, button {
     border: none;
     outline: none;
-}
-
-#search_form1 {
-    display: flex;
-    width: auto;
-    overflow: hidden;
-}
-
-#search_form2 {
-    display: flex;
-    width: auto;
-    overflow: hidden;
-}
-
-input {
     font-style: italic;
     width: 11vw;
     height: 1.5vw;
@@ -105,20 +89,17 @@ input {
     color: gray;
 }
 
-.select_hashtag {
-    display: flex;
-    font-style: italic;
-    width: 11vw;
-    height: 1.5vw;
-    font-size: 1vw;
-    border-radius: 0.5vw;
-    color: gray;
-}
+/*#search_form1, #search_form2 {*/
+/*display: flex;*/
+/*width: auto;*/
+/*overflow: hidden;*/
+
+/*}*/
 
 button {
     display: flex;
     cursor: pointer;
-    color: #00000
+    color: #000;
 }
 
 .button_search {
@@ -126,9 +107,9 @@ button {
     width: 2vw;
 }
 
-button:before {
-    font-family: FontAwesome;
-}
+/*button:before {*/
+/*font-family: FontAwesome;*/
+/*}*/
 
 .sign_out {
     font-size: 1.5vw;
@@ -138,12 +119,28 @@ button:before {
 
 /*Main*/
 main {
-    background: #FAFAFA;
+    background: #f3f3f4;
     display: inline-block;
     font-family: 'Cabin', sans-serif;
     z-index: 9999;
     width: 100%;
 }
+
+/*Sign up*/
+.sign_up {
+    display: inline-block;
+    font-size: 1.2vw;
+    line-height: 1;
+    width: 70%;
+    align-items: center;
+    height: 25vw;
+    background: #fff;
+    margin-left: 15%;
+}
+
+/*.registration{*/
+
+/*}*/
 
 /*Lenta*/
 .site_content {
@@ -174,6 +171,12 @@ main {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-size: 1vw;
+    line-height: 1;
+}
+
+.name {
+    font-weight: bold;
 }
 
 .post_image {
@@ -183,13 +186,10 @@ main {
     height: 4vw;
 }
 
-.name_date {
+.image_name_date p {
     margin: 0 0.5vw;
     width: auto;
     display: inline-block;
-    text-align: left;
-    font-size: 1vw;
-    line-height: 1;
 }
 
 .delete_redact {
@@ -221,33 +221,48 @@ main {
     height: 33vw;
 }
 
-.entry_like {
-    display: flex;
-    width: 100%;
-    height: 3.7vw;
-    justify-content: space-between;
-    align-items: center;
+.entry {
+    display: inline-block;
+    width: 85%;
+    height: auto;
+    font-style: italic;
 }
 
-.like {
+.put_like {
     display: inline-block;
     float: right;
-    width: 3.6vw;
-    height: 3.6vw;
+    width: 4vw;
     background-color: #fff;
 }
 
-.line {
-    border: 2vw solid #FAFAFA;
+.hashTag {
+    width: 100%;
+    display: inline-block;
+    margin: 0 0.3vw 0 0;
+    color: gray;
+}
+
+.like {
+    width: 100%;
+    display: inline-block;
+    margin: 1vw 0.3vw 0 0;
+    color: gray;
+}
+
+.like p {
+    width: auto;
+    float: left;
 }
 
 .download {
     display: inline-block;
     width: 100%;
-    font-size: 1.8vw;
+    font-size: 1.5vw;
     color: #7D7D7D;
     background-color: #fff;
     margin-bottom: 1.5vw;
+    border-radius: 0;
+    letter-spacing: 0.1vw;
 }
 
 /*Avatar*/
@@ -274,9 +289,9 @@ main {
 .avatar p {
     text-align: center;
     font-size: 1vw;
-    font-family: 'Crimson Text';
+    font-family: 'Crimson Text', sans-serif;;
     text-transform: uppercase;
-    letter-spacing: 0.1vw
+    letter-spacing: 0.1vw;
 }
 
 .name a {

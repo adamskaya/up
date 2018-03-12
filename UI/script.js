@@ -167,9 +167,9 @@
 
         function filterAuthor(photoPosts, author) {
             var result = [];
-            for (var i in photoPosts) {
-                if (photoPosts[i].author === author) {
-                    result.push(photoPosts[i]);
+            for (var item in photoPosts) {
+                if (photoPosts[item].author === author) {
+                    result.push(photoPosts[item]);
                 }
             }
             return result;
@@ -177,9 +177,9 @@
 
         function filterHashtag(photoPosts, hashtag) {
             var result = [];
-            for (var i in photoPosts) {
-                if (photoPosts[i].hashTag === hashtag) {
-                    result.push(photoPosts[i]);
+            for (var item in photoPosts) {
+                if (photoPosts[item].hashTag === hashtag) {
+                    result.push(photoPosts[item]);
                 }
             }
             return result;
@@ -202,47 +202,48 @@
         }
 
         function getPhotoPost(id) {
-            for (var i in photoPosts) {
-                if (photoPosts[i].id === id) {
-                    return photoPosts[i];
+            for (var item in photoPosts) {
+                if (photoPosts[item].id === id) {
+                    return photoPosts[item];
                 }
             }
         }
 
-        function validatePhotoPost(photoPost){
-            if(typeof(photoPost.id) !== "string" || typeof(photoPost.author) !== "string" || typeof(photoPost.description) !== "string"
+        function validatePhotoPost(photoPost) {
+            if (typeof(photoPost.id) !== "string" || typeof(photoPost.author) !== "string" || typeof(photoPost.description) !== "string"
                 || typeof(photoPost.photoLink) !== "string") {
                 return false;
             }
-            if(photoPost.id.trim() === "" || photoPost.author.trim() === "" || photoPost.description.trim() === "" || photoPost.photoLink.trim() === ""
-                || photoPost.hashTag.length === 0 || photoPost.like.length === 0){
+            if (photoPost.id.trim() === "" || photoPost.author.trim() === "" || photoPost.description.trim() === "" || photoPost.photoLink.trim() === ""
+                || photoPost.hashTag.length === 0 || photoPost.like.length === 0) {
                 return false;
             }
-            for(var i in photoPost.hashTag){
-                if(typeof(photoPost.hashTag[i]) !== "string" || photoPost.hashTag[i].trim() === "") {
+            for (var item in photoPost.hashTag) {
+                if (typeof(photoPost.hashTag[item]) !== "string" || photoPost.hashTag[item].trim() === "") {
                     return false;
                 }
             }
 
-            for(var i in photoPost.like){
-                if(typeof(photoPost.like[i]) !== "string" || photoPost.like[i].trim() === "") {
+            for (var item in photoPost.like) {
+                if (typeof(photoPost.like[item]) !== "string" || photoPost.like[item].trim() === "") {
                     return false;
                 }
             }
 
-            if(!photoPost.createdAt instanceof Date){
+            if (!photoPost.createdAt instanceof Date) {
                 return false;
             }
             return true;
         }
+
         function removePhotoPost(id) {
-                for (var i in photoPosts) {
-                    if (photoPosts[i].id === id) {
-                        photoPosts = photoPosts.splice(i, 1);
-                        return true;
-                    }
-                    return false;
+            for (var item in photoPosts) {
+                if (photoPosts[item].id === id) {
+                    photoPosts = photoPosts.splice(item, 1);
+                    return true;
                 }
+                return false;
+            }
         }
 
         function addPhotoPost(objectPhotoPost) {
@@ -261,9 +262,9 @@
                 if (id === undefined) {
                     return false;
                 }
-                for (var i in photoPosts) {
-                    if (photoPosts[i].id === id) {
-                        var post = photoPosts[i];
+                for (var item in photoPosts) {
+                    if (photoPosts[item].id === id) {
+                        var post = photoPosts[item];
                         if (objectPhotoPost.photoLink !== undefined && objectPhotoPost.photoLink !== 0) {
                             post.photoLink = objectPhotoPost.photoLink;
                         }
@@ -275,11 +276,10 @@
 
                             post.hashTag = objectPhotoPost.hashTag;
                         }
-                        photoPosts[i] = post;
+                        photoPosts[item] = post;
                         console.log(post);
                         return true;
-                    } else
-                        return false;
+                    }
                 }
             }
             return false;
@@ -294,11 +294,12 @@
             createdAt: new Date('2018-02-23T21:00:00'),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/21.jpg',
-            hashTag:['#hashtag_1', '#hashtag_2'],
+            hashTag: ['#hashtag_1', '#hashtag_2'],
             like: ['author21']
         });
         removePhotoPost('4');
         editPhotoPost('1', {hashTag: ['#hashtag_1', '#hashtag_8']});
         getPhotoPost('1');
     }
+
 )();

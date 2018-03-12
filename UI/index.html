@@ -6,24 +6,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<script src="script.js"></script>
 <header>
     <div class="logo">Marshmallows</div>
     <div class="menu">
         <a href="index.html" class="home">Home</a>
         <form action="" method="get" class="search">
             <!--1search-->
-            <input type="text" id="search_form1" placeholder=" search by date..." class="input">
+            <input type="text" placeholder=" search by date...">
             <!--2search-->
-            <input type="text" id="search_form2" placeholder=" search by name...">
+            <input type="text" placeholder=" search by name...">
             <!--3search-->
-            <select name="select" class="select_hashtag">
-                <option value="" hidden disabled selected>search by hashTag...</option>
-                <option value="s1">#Nature</option>
-                <option value="s2">#Food</option>
-                <option value="s3">#Coffe</option>
-                <option value="s4">#Flowers</option>
-            </select>
+            <input type="text" list="hashTag" placeholder=" search by hashTag...">
+            <datalist id="hashTag">
+                <option>#nature</option>
+                <option>#food</option>
+                <option>#coffe</option>
+                <option>#flowers</option>
+            </datalist>
+
             <button type="submit" class="button_search"><img src="images/search.png"/></button>
         </form>
         <a href="" class="sign_out">Sign out</a>
@@ -31,389 +31,27 @@
 </header>
 <main>
     <div class="site_content">
-        <!--1photo-->
-        <div class="photo_post" id="1">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/103.png"/>
-                    <p class="name_date"><b>Murashko Yuliya</b><br>06.03.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/1.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--2photo-->
-        <div class="photo_post" id="2">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>05.03.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/2.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--3photo-->
-        <div class="photo_post" id="3">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>04.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/3.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--4photo-->
-        <div class="photo_post" id="4">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>01.03.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/4.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--5photo-->
-        <div class="photo_post" id="5">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/102.png"/>
-                    <p class="name_date"><b>Ambrosyonok Marina</b><br>12.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/5.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--6photo-->
-        <div class="photo_post" id="6">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>28.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/6.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--7photo-->
-        <div class="photo_post" id="7">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/103.png"/>
-                    <p class="name_date"><b>Murashko Yuliya</b><br>25.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/7.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--8photo-->
-        <div class="photo_post" id="8">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>15.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/8.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--9photo-->
-        <div class="photo_post" id="9">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/102.png"/>
-                    <p class="name_date"><b>Ambrosyonok Marina</b><br>01.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/9.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--10photo-->
-        <div class="photo_post" id="10">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>12.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/10.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
+        <!--&lt;!&ndash;1photo&ndash;&gt;-->
+        <!--<div class="photo_post">-->
+        <!--<div class="post">-->
+        <!--<div class="image_name_date">-->
+        <!--<img class="post_image" src="images/103.png"/>-->
+        <!--<p class="name">Murashko Yuliya</p>-->
+        <!--<p class="date_post">06.03.2018</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<img class="photo" src="images/1_1.jpg">-->
+        <!--<div class="entry">-->
+        <!--<p class="description">Text...</p>-->
+        <!--<p class="hashTag">#coffe</p>-->
+        <!--<div class="like"> <p>Like: </p><p>author1, author2</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<button type="button" class="put_like"><img src="images/heart1.png" alt="like"/></button>-->
+        <!--</div>-->
 
-        <button type="button" class="download"><b>...</b></button>
+        <!--<button type="button" class="download"><b>...</b></button>-->
 
-        <!--11photo-->
-        <div class="photo_post" id="11">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/103.png"/>
-                    <p class="name_date"><b>Murashko Yuliya</b><br>20.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/11.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--12photo-->
-        <div class="photo_post" id="12">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>10.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/12.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--13photo-->
-        <div class="photo_post" id="13">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/103.png"/>
-                    <p class="name_date"><b>Murashko Yuliya</b><br>01.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/13.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--14photo-->
-        <div class="photo_post" id="14">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>03.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/14.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--15photo-->
-        <div class="photo_post" id="15">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/102.png"/>
-                    <p class="name_date"><b>Ambrosyonok Marina</b><br>10.01.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/15.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--16photo-->
-        <div class="photo_post" id="16">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>02.02.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/16.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--17photo-->
-        <div class="photo_post" id="17">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>27.01.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/17.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--18photo-->
-        <div class="photo_post" id="18">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/102.png"/>
-                    <p class="name_date"><b>Ambrosyonok Marina</b><br>02.01.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/18.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--19photo-->
-        <div class="photo_post" id="19">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/103.png"/>
-                    <p class="name_date"><b>Murashko Yuliya</b><br>26.01.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/19.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
-        <!--20photo-->
-        <div class="photo_post" id="20">
-            <div class="post">
-                <div class="image_name_date"><img class="post_image" src="images/101.png"/>
-                    <p class="name_date"><b>Adamskaya Yuliya</b><br>25.01.2018</p>
-                </div>
-                <div class="delete_redact">
-                    <button type="button" class="delete"><img src="images/delete.png" alt="delete"/></button>
-                    <button type="button" class="redact"><img src="images/edit.png" alt="redact"/></button>
-                </div>
-            </div>
-            <img class="photo" src="images/20.jpg"/>
-            <div class="entry_like">
-                <div class="entry"><p>Text..</p>
-                    <p>#hashteg</p>
-                </div>
-                <button type="button" class="like"><img src="images/heart1.png" alt="like"/></button>
-            </div>
-        </div>
     </div>
     <div class="avatar">
         <img class="avatar_image" src="images/101.png"/>
@@ -433,6 +71,7 @@
     </div>
     <p class="data">Adamskaya Yuliya 2 course 6 group<br>03.03.2018</p>
 </footer>
+<script src="DOM.js"></script>
 </body>
 </html>
 
