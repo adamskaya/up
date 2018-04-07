@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marshmallows</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="logo">Marshmallows</div>
+    <div class="menu">
+        <a href="index.html" class="home">Home</a>
+        <form action="" method="get" class="search">
+            <!--1search-->
+            <input type="text" placeholder=" search by date...">
+            <!--2search-->
+            <input type="text" placeholder=" search by name...">
+            <!--3search-->
+            <input type="text" list="hashTag" placeholder=" search by hashTag...">
+            <datalist id="hashTag">
+                <option>#nature</option>
+                <option>#food</option>
+                <option>#coffe</option>
+                <option>#flowers</option>
+            </datalist>
+
+            <button type="submit" class="button_search"><img src="images/search.png"/></button>
+        </form>
+        <a href="" class="sign_out">Sign out</a>
+    </div>
+</header>
+<main>
+    <div class="site_content">
+        <!--&lt;!&ndash;1photo&ndash;&gt;-->
+        <!--<div class="photo_post">-->
+        <!--<div class="post">-->
+        <!--<div class="image_name_date">-->
+        <!--<img class="post_image" src="images/103.png"/>-->
+        <!--<p class="name">Murashko Yuliya</p>-->
+        <!--<p class="date_post">06.03.2018</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<img class="photo" src="images/1_1.jpg">-->
+        <!--<div class="entry">-->
+        <!--<p class="description">Text...</p>-->
+        <!--<p class="hashTag">#coffe</p>-->
+        <!--<div class="like"> <p>Like: </p><p>author1, author2</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<button type="button" class="put_like"><img src="images/heart1.png" alt="like"/></button>-->
+        <!--</div>-->
+
+        <!--<button type="button" class="download"><b>...</b></button>-->
+
+    </div>
+    <div class="avatar">
+        <img class="avatar_image" src="images/101.png"/>
+        <div class="name">
+            <p><b>Adamskaya Yuliya</b></p>
+            <a href=""><i>Add post</i></a>
+            <div class="line"></div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="logo_footer">Marshmallows</div>
+    <div class="footer_icon">
+        <button type="button" class="vk"><img src="images/vk.png" alt="vk"/></button>
+        <button type="button" class="email"><img src="images/email.png" alt="email"/></button>
+        <button type="button" class="insta"><img src="images/insta.png" alt="instagram"/></button>
+    </div>
+    <p class="data">Adamskaya Yuliya 2 course 6 group<br>03.03.2018</p>
+</footer>
+<script src="DOM.js"></script>
+</body>
+</html>
+
