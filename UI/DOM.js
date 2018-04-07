@@ -232,16 +232,21 @@ var module = (function () {
             top = top || 10;
             var PhotoPosts = AllPosts;
             if (filterConfig === undefined) {
-                PhotoPosts.sort(compareDate).slice(skip, skip + top);
+                PhotoPosts.sort(compareDate);
+                PhotoPosts = PhotoPosts.slice(skip, skip + top);
+                console.log(PhotoPosts);
+
             } else {
                 if (filterConfig.author !== undefined) {
                     PhotoPosts = PhotoPosts.filter((element) => element.author === filterConfig.author);
-                    console.log(PhotoPosts);
                 }
                 if (filterConfig.hashTag !== undefined) {
                     PhotoPosts = PhotoPosts.filter((element) => element.hashTag === filterConfig.hashTag);
                 }
-                PhotoPosts.sort(compareDate).slice(skip, skip + top);
+                PhotoPosts.sort(compareDate);
+                PhotoPosts = PhotoPosts.slice(skip, skip + top);
+                console.log(PhotoPosts);
+
             }
         }
 
