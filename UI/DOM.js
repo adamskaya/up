@@ -1,6 +1,6 @@
 
 var module = (function () {
-        var AllPosts = [{
+        var allPosts = [{
             id: 1,
             description: 'Text',
             createdAt: '25.01.2018',
@@ -165,9 +165,9 @@ var module = (function () {
 
         function unregisteredOrRegisteredUser() {
             if (user === null) {
+                //document.querySelector('.avatar').classList.remove("avatar");
                 var blockAvatar = document.getElementsByClassName('avatar')[0];
-                var main = document.querySelector('main');
-                main.removeChild(blockAvatar);
+                document.querySelector('main').removeChild(blockAvatar);
                 document.getElementsByClassName('sign_out')[0].textContent = 'Sign Up';
                 return false;
             } else {
@@ -209,17 +209,16 @@ var module = (function () {
                 newElem.getElementsByClassName('post')[0].appendChild(edit_delete);
             }
             container.insertBefore(newElem, firstElem);
-            if (objectPhotoPost.id > AllPosts.length) {
-                AllPosts.push(objectPhotoPost);
+            if (objectPhotoPost.id > allPosts.length) {
+                allPosts.push(objectPhotoPost);
                 return true;
             }
         }
 
         function displayHtmlPhotoPosts() {
             unregisteredOrRegisteredUser();
-
-            for (var item in AllPosts) {
-                addPhotoPost(AllPosts[item]);
+            for (var item in allPosts) {
+                addPhotoPost(allPosts[item]);
             }
         }
 
@@ -230,22 +229,22 @@ var module = (function () {
         function getPhotoPosts(skip, top, filterConfig) {
             skip = skip || 0;
             top = top || 10;
-            var PhotoPosts = AllPosts;
+            var photoPosts = allPosts;
             if (filterConfig === undefined) {
-                PhotoPosts.sort(compareDate);
-                PhotoPosts = PhotoPosts.slice(skip, skip + top);
-                console.log(PhotoPosts);
+                photoPosts.sort(compareDate);
+                photoPosts = photoPosts.slice(skip, skip + top);
+                console.log(photoPosts);
 
             } else {
                 if (filterConfig.author !== undefined) {
-                    PhotoPosts = PhotoPosts.filter((element) => element.author === filterConfig.author);
+                    photoPosts = photoPosts.filter((element) => element.author === filterConfig.author);
                 }
                 if (filterConfig.hashTag !== undefined) {
-                    PhotoPosts = PhotoPosts.filter((element) => element.hashTag === filterConfig.hashTag);
+                    photoPosts = photoPosts.filter((element) => element.hashTag === filterConfig.hashTag);
                 }
-                PhotoPosts.sort(compareDate);
-                PhotoPosts = PhotoPosts.slice(skip, skip + top);
-                console.log(PhotoPosts);
+                photoPosts.sort(compareDate);
+                photoPosts = photoPosts.slice(skip, skip + top);
+                console.log(photoPosts);
 
             }
         }
@@ -257,9 +256,9 @@ var module = (function () {
             if (id === undefined) {
                 return false;
             }
-            var index = AllPosts.findIndex((element) => element.id === id);
+            var index = allPosts.findIndex((element) => element.id === id);
             if (index >= 0) {
-                var post = AllPosts[index];
+                var post = allPosts[index];
                 if (objectPhotoPost.hasOwnProperty('photoLink')) {
                     var editPhotoLink = document.getElementsByClassName('photo')[index];
                     editPhotoLink.src = objectPhotoPost.photoLink;
@@ -278,19 +277,19 @@ var module = (function () {
                         addOptionToSelect(objectPhotoPost.hashTag[item], document.getElementById('hashTag'));
                     }
                 }
-                AllPosts[index] = post;
+                allPosts[index] = post;
             }
             return true;
 
         }
 
         function removePhotoPost(id) {
-            var index = AllPosts.findIndex((element) => element.id === id);
+            var index = allPosts.findIndex((element) => element.id === id);
             if (index >= 0) {
                 var container = document.querySelector('.site_content');
                 var deleteElem = document.getElementsByClassName('photo_post')[index];
                 container.removeChild(deleteElem);
-                AllPosts.splice(index, 1);
+                allPosts.splice(index, 1);
                 return true;
             } else {
                 return false;
@@ -314,16 +313,16 @@ var module = (function () {
     }
 )();
 console.log(module.displayHtmlPhotoPosts());
-console.log(module.getPhotoPosts(0, 10, {author: 'Adamskaya Yuliya'}));
-console.log(module.removePhotoPost(1));
-console.log(module.editPhotoPost(5, {description: 'newText', photoLink: 'images/22.jpg'}));
-console.log(module.editPhotoPost(2, {hashTag: ['#otherHashtag1', '#otherHashtag2']}));
-console.log(module.addPhotoPost({
-    id: 21,
-    description: 'Text',
-    createdAt: '12.03.2018',
-    author: 'Adamskaya Yuliya',
-    photoLink: 'images/21.jpg',
-    hashTag: ['#flowers']
-}));
+// console.log(module.getPhotoPosts(0, 10, {author: 'Adamskaya Yuliya'}));
+// console.log(module.removePhotoPost(1));
+// console.log(module.editPhotoPost(5, {description: 'newText', photoLink: 'images/22.jpg'}));
+// console.log(module.editPhotoPost(2, {hashTag: ['#otherHashtag1', '#otherHashtag2']}));
+// console.log(module.addPhotoPost({
+//     id: 21,
+//     description: 'Text',
+//     createdAt: '12.03.2018',
+//     author: 'Adamskaya Yuliya',
+//     photoLink: 'images/21.jpg',
+//     hashTag: ['#flowers']
+// }));
 

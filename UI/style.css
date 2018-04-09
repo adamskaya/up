@@ -65,7 +65,7 @@ header {
     font-weight: 600;
 }
 
-.home {
+#home {
     font-size: 1.5vw;
     display: flex;
 }
@@ -87,6 +87,7 @@ input, button, select {
     font-size: 1vw;
     border-radius: 0.5vw;
     color: gray;
+
 }
 
 /*#search_form1, #search_form2 {*/
@@ -102,7 +103,7 @@ button {
     color: #000;
 }
 
-.button_search {
+#button_search {
     height: 2vw;
     width: 2vw;
 }
@@ -111,7 +112,7 @@ button {
 /*font-family: FontAwesome;*/
 /*}*/
 
-.sign_out {
+#sign_out_sign_in{
     font-size: 1.5vw;
     display: flex;
     margin-right: 2vw;
@@ -128,20 +129,65 @@ main {
 
 /*Sign up*/
 .sign_up {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     font-size: 1.2vw;
     line-height: 1;
     width: 70%;
-    align-items: center;
     height: 25vw;
     background: #fff;
     margin-left: 15%;
 }
 
-/*.registration{*/
+.text_registration{
+    display: inline-block;
+    text-align: center;
+    font-size: 1vw;
+    color: #000;
+}
+.registration {
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+    height: 70%;
+    display: flex;
+}
+.userRegistration, .keyRegistration {
+    display: flex;
+    align-items: center;
+}
 
-/*}*/
+.userRegistration img, .keyRegistration img{
+    width: 2.5vw;
+    height: 2.5vw;
+}
+#username, #password {
 
+    font-style: italic;
+    width: 17vw;
+    height: 2.5vw;
+    font-size: 1.4vw;
+    color: gray;
+    background-color: #f3f3f4;
+    border-radius: 0;
+    margin: 0.5vw 0vw;
+
+}
+
+#button_registration{
+    height: 2vw;
+    width: 8vw;
+    text-align: center;
+    font-size: 1.2vw;
+    color: gray;
+    font-weight: bold;
+    display: inline-block;
+    background: #f3f3f4;
+    margin: 0.5vw;
+
+}
 /*Lenta*/
 .site_content {
     font-size: 1.2vw;
@@ -205,7 +251,7 @@ main {
     background-color: #fff;
 }
 
-.edit {
+#edit {
     display: flex;
     height: 1.3vw;
     width: 1.3vw;
@@ -265,7 +311,7 @@ main {
 }
 
 /*Avatar*/
-#avatar {
+.avatar {
     text-align: center;
     line-height: 2;
     display: inline-block;
