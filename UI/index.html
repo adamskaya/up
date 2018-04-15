@@ -5,7 +5,8 @@
     <title>Marshmallows</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body><header>
+<body>
+<header>
     <div class="logo">Marshmallows</div>
     <div class="menu">
         <a href="index.html" id="home">Home</a>
@@ -15,7 +16,7 @@
             <!--2search-->
             <input name = "username"  placeholder=" search by name...">
             <!--3search-->
-            <select name="select" >
+            <select name="select" id = "hashTag" >
                 <option value="" hidden disabled selected>search hashTag...</option>
                 <option>#nature</option>
                 <option>#food</option>
@@ -24,7 +25,7 @@
             </select>
             <button type="submit" id="button_search"><img src="images/search.png"/></button>
         </form>
-        <a href="signUp.html" id ="sign_out_sign_in">Sign out</a>
+        <a href="" id ="sign_out_sign_in">Sign out</a>
     </div>
 </header>
 <main>
@@ -48,15 +49,14 @@
             <!--</div>-->
             <!--<button type="button" class="put_like"><img src="images/heart1.png" alt="like"/></button>-->
         <!--</div>-->
-
         <!--<button type="button" class="download"><b>...</b></button>-->
 
     </div>
     <div class="avatar">
         <img class="avatar_image" src="images/user.png"/>
         <div class="name">
-            <p id="user">Adamskaya Yuliya</p>
-            <a href="addPhotoPost.html"><i>Add post</i></a>
+            <p id="user">user</p>
+            <button class = "button_add"><i>Add post</i></button>
             <div class="line"></div>
         </div>
     </div>
@@ -70,7 +70,8 @@
     </div>
     <p class="data">Adamskaya Yuliya 2 course 6 group<br>03.03.2018</p>
 </footer>
-<!--<script src="DOM.js"></script>-->
+<script src="script.js"></script>
+<script src="DOM.js"></script>
 <script src="eventsHome.js"></script>
 </body>
 </html>

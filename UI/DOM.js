@@ -1,298 +1,160 @@
+var moduleDomScript = (function () {
 
-var module = (function () {
-        var allPosts = [{
-            id: 1,
-            description: 'Text',
-            createdAt: '25.01.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/20.jpg',
-            hashTag: ['#nature', '#flowers'],
-            like: ['author1', 'author2']
-        }, {
-            id: 2,
-            description: 'Text',
-            createdAt: '26.01.2018',
-            author: 'Murashko Yuliya',
-            photoLink: 'images/19_2.jpg',
-            hashTag: ['#nature', '#flowers'],
-            like: ['author1', 'author3']
-        }, {
-            id: 3,
-            description: 'Text',
-            createdAt: '02.01.2018',
-            author: 'Ambrosyonok Marina',
-            photoLink: 'images/18.jpg',
-            hashTag: ['#coffe'],
-            like: ['author2']
-        }, {
-            id: 4,
-            description: 'Text',
-            createdAt: '27.01.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/17.jpg',
-            hashTag: ['#coffe'],
-            like: ['author3']
-        }, {
-            id: 5,
-            description: 'Text',
-            createdAt: '02.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/16_1.jpg',
-            hashTag: ['#food'],
-            like: ['author1', 'author2']
-        }, {
-            id: 6,
-            description: 'Text',
-            createdAt: '10.01.2018',
-            author: 'Ambrosyonok Marina',
-            photoLink: 'images/15.jpg',
-            hashTag: ['#flowers'],
-            like: ['author1', 'author2']
-        }, {
-            id: 7,
-            description: 'Text',
-            createdAt: '03.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/14.jpg',
-            hashTag: ['#food'],
-            like: ['author2']
-        }, {
-            id: 8,
-            description: 'Text',
-            createdAt: '01.02.2018',
-            author: 'Murashko Yuliya',
-            photoLink: 'images/13.jpg',
-            hashTag: ['#food'],
-            like: ['author1', 'author2', 'author3']
-        }, {
-            id: 9,
-            description: 'Text',
-            createdAt: '10.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/12.jpg',
-            hashTag: ['#flowers'],
-            like: ['author1']
-        }, {
-            id: 10,
-            description: 'Text',
-            createdAt: '20.02.2018',
-            author: 'Murashko Yuliya',
-            photoLink: 'images/11.jpg',
-            hashTag: ['#food'],
-            like: ['author1', 'author2']
-        }, {
-            id: 11,
-            description: 'Text',
-            createdAt: '12.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/10.jpg',
-            hashTag: ['#nature'],
-            like: ['']
-        }, {
-            id: 12,
-            description: 'Text',
-            createdAt: '01.02.2018',
-            author: 'Ambrosyonok Marina',
-            photoLink: 'images/9.jpg',
-            hashTag: ['#food'],
-            like: ['author1', 'author3']
-        }, {
-            id: 13,
-            description: 'Text',
-            createdAt: '15.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/8.jpg',
-            hashTag: ['#flowers'],
-            like: ['author2']
-        }, {
-            id: 14,
-            description: 'Text',
-            createdAt: '25.02.2018',
-            author: 'Murashko Yuliya',
-            photoLink: 'images/7_1.jpg',
-            hashTag: [''],
-            like: ['author3']
-        }, {
-            id: 15,
-            description: 'Text',
-            createdAt: '28.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/6.jpg',
-            hashTag: ['#coffe'],
-            like: ['author1', 'author2']
-        }, {
-            id: 16,
-            description: 'Text',
-            createdAt: '12.02.2018',
-            author: 'Ambrosyonok Marina',
-            photoLink: 'images/5_1.jpg',
-            hashTag: ['#flowers', '#nature'],
-            like: ['author1', 'author2']
-        }, {
-            id: 17,
-            description: 'Text',
-            createdAt: '01.03.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/1.jpg',
-            hashTag: ['#food'],
-            like: ['author1', 'author2', 'author3']
-        }, {
-            id: 18,
-            description: 'Text',
-            createdAt: '04.02.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/3.jpg',
-            hashTag: ['#food'],
-            like: ['author2']
-        }, {
-            id: 19,
-            description: 'Text',
-            createdAt: '05.03.2018',
-            author: 'Adamskaya Yuliya',
-            photoLink: 'images/2.jpg',
-            hashTag: ['#nature'],
-            like: ['author1']
-        }, {
-            id: 20,
-            description: 'Text',
-            createdAt: '06.03.2018',
-            author: 'Murashko Yuliya',
-            photoLink: 'images/1_1.jpg',
-            hashTag: ['#coffe'],
-            like: ['author1", "author2']
-        }];
-        var user = null;
-
-        function unregisteredOrRegisteredUser() {
+        function getUser(user) {
             if (user === null) {
-                //document.querySelector('.avatar').classList.remove("avatar");
-                var blockAvatar = document.getElementsByClassName('avatar')[0];
-                document.querySelector('main').removeChild(blockAvatar);
-                document.getElementsByClassName('sign_out')[0].textContent = 'Sign Up';
-                return false;
+                if (document.querySelector('.avatar')) {
+                    document.querySelector('main').removeChild(document.querySelector('.avatar'));
+                    document.getElementById('sign_out_sign_in').textContent = 'Sign up';
+                }
             } else {
                 var userName = document.getElementById('user');
                 userName.textContent = user;
-                return true;
             }
         }
 
-        function addPhotoPost(objectPhotoPost) {
-            var container = document.querySelector('.site_content');
-            var newElem = document.createElement('div');
-            var firstElem = document.getElementsByClassName('photo_post')[0];
-            newElem.className = 'photo_post';
-            newElem.innerHTML =
-            `<div class="post">
+        function userLike(likes, user) {
+            if (likes.findIndex((element) => element === user) >= 0) {
+                return 'images/heart2.png';
+            }
+            return 'images/heart1.png';
+        }
+
+        function getLikes(index, post, user) {
+            document.getElementsByClassName('like')[index].src = userLike(post.like, user);
+            document.getElementsByClassName('number_of_likes')[index].textContent = post.like.length;
+        }
+
+        function displayHtmlPhotoPost(objectPhotoPost, user) {
+            var photoPost = document.createElement('div');
+            photoPost.className = 'photo_post';
+            photoPost.setAttribute('data_post_id', objectPhotoPost.id);
+            photoPost.innerHTML = `<div class="post">
         <div class="image_name_date">
-            <img class="post_image" src="images/avatar.png"/>
-            <p class="name">${objectPhotoPost.author}</p>
-            <p class="date_post">${objectPhotoPost.createdAt}</p>
+        <img class="post_image" src="images/avatar.png"/>
+        <p class="name">${objectPhotoPost.author}</p>
+        <p class="date_post">${new Date(objectPhotoPost.createdAt).toLocaleDateString()}</p>
         </div>
-    </div>
-    <img class="photo" src="${ objectPhotoPost.photoLink}">
-    <div class="entry"><p class="description">${objectPhotoPost.description}</p>
+        </div>
+        <img class="photo" src="${ objectPhotoPost.photoLink}">
+        <div class="entry"><p class="description">${objectPhotoPost.description}</p>
         <p class="hashTag">${objectPhotoPost.hashTag}</p>
-        <div class="like"><p>Like:</p>
-            <p>${objectPhotoPost.like}</p>
+        <div class="users_like"><p>Likes:</p>
+        <p class = "number_of_likes"> ${objectPhotoPost.like.length}</p>
         </div>
-    </div>
-    <button type="button" class="put_like">
-        <img src="images/heart1.png" alt="like"/></button>
-    </div>`;
+        </div>
+        <div class = 'button_like'><button type="button" class="put_like">
+        <img src="${userLike(objectPhotoPost.like, user)}" class="like"/>
+        </button></div></div>`;
             if (objectPhotoPost.author === user) {
                 var edit_delete = document.createElement("div");
                 edit_delete.className = 'delete_edit';
                 edit_delete.innerHTML =
-                    `<button type="button" class="delete"><img src="images/delete.png" alt="delete post"/></button>
-        <button type="button" class="edit"><img src="images/edit.png" alt="redact post"/></button>`;
-                newElem.getElementsByClassName('post')[0].appendChild(edit_delete);
+                    `<button  type="button" class="delete" >
+        <img src="images/delete.png" class="delete_post"/>
+        </button>
+        <button type="button" class="edit">
+        <img src="images/edit.png" class="edit_post"/></button>`;
+                photoPost.querySelector('.post').appendChild(edit_delete);
             }
-            container.insertBefore(newElem, firstElem);
-            if (objectPhotoPost.id > allPosts.length) {
-                allPosts.push(objectPhotoPost);
-                return true;
+            return photoPost;
+        }
+
+        function displayHtmlSignUp() {
+            document.querySelector('form').innerHTML = '';
+            document.querySelector('main').removeChild(document.querySelector('.site_content'));
+            var signUp = document.createElement('div');
+            signUp.className = 'sign_up';
+            signUp.innerHTML = `<form name="registrationForm" action="" class="registration">
+            <div class="userRegistration"><img src="images/userRegistration.png"/>
+            <input name="username" id="username" placeholder=" Username...">
+            </div>
+            <div class="keyRegistration"><img src="images/keyRegistration.png"/>
+            <input name="password" id="password" placeholder=" Password..."></div>
+            <button type="submit" id="button_registration" value="Sign up"><a href="index.html"> Sign up</a></button></form>`;
+            document.querySelector('main').appendChild(signUp);
+        }
+
+        function displayHtmlAddPhotoPost() {
+            document.querySelector('main').removeChild(document.querySelector('.avatar'));
+            document.querySelector('form').innerHTML = '';
+            document.querySelector('main').removeChild(document.querySelector('.site_content'));
+            var addPhotoPost = document.createElement('div');
+            addPhotoPost.className = 'add_post';
+            document.querySelector('main').appendChild(addPhotoPost);
+        }
+
+        function displayHtmlButtonDownload(flag) {
+            if (flag) {
+                var downloadButton = document.createElement("div");
+                downloadButton.innerHTML = `<button type="button" id="download"><b>...</b></button>`;
+                document.querySelector('.site_content').insertBefore(downloadButton, document.querySelector('.site_content').lastChild);
+            }
+            else {
+                document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
             }
         }
 
-        function displayHtmlPhotoPosts() {
-            unregisteredOrRegisteredUser();
-            for (var item in allPosts) {
-                addPhotoPost(allPosts[item]);
+        function pagination(photoPosts, user) {
+            document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
+            for (var index = 0; index < photoPosts.length; index++) {
+                document.querySelector('.site_content').insertBefore(displayHtmlPhotoPost(photoPosts[index], user), document.querySelector('.site_content').lastChild);
             }
+
         }
 
-        function compareDate(a, b) {
-            return a.createdAt - b.createdAt;
-        }
-
-        function getPhotoPosts(skip, top, filterConfig) {
-            skip = skip || 0;
-            top = top || 10;
-            var photoPosts = allPosts;
-            if (filterConfig === undefined) {
-                photoPosts.sort(compareDate);
-                photoPosts = photoPosts.slice(skip, skip + top);
-                console.log(photoPosts);
-
-            } else {
-                if (filterConfig.author !== undefined) {
-                    photoPosts = photoPosts.filter((element) => element.author === filterConfig.author);
+        function addPhotoPost(objectPhotoPost, user) {
+            document.querySelector('.site_content').insertBefore(displayHtmlPhotoPost(objectPhotoPost, user), document.querySelector('.site_content').firstChild);
+            if (objectPhotoPost.hashTag !== '') {
+                for (var index = 0; index < objectPhotoPost.hashTag.length; index++) {
+                    addOptionToSelect(objectPhotoPost.hashTag[index], document.getElementById('hashTag'));
                 }
-                if (filterConfig.hashTag !== undefined) {
-                    photoPosts = photoPosts.filter((element) => element.hashTag === filterConfig.hashTag);
-                }
-                photoPosts.sort(compareDate);
-                photoPosts = photoPosts.slice(skip, skip + top);
-                console.log(photoPosts);
-
             }
         }
 
-        function editPhotoPost(id, objectPhotoPost) {
+        function displayHtmlPhotoPosts(photoPosts, user) {
+            for (var index = 0; index < document.getElementsByClassName('photo_post').length; index++) {
+                document.getElementsByClassName('photo_post')[index].innerHTML = '';
+            }
+            if (document.getElementById('download')) {
+                document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
+            }
+            getUser(user);
+            for (var index = 0; index < photoPosts.length; index++) {
+                document.querySelector('.site_content').insertBefore(displayHtmlPhotoPost(photoPosts[index], user), document.querySelector('.site_content').lastChild);
+            }
+
+        }
+
+        function editPhotoPost(photoPost, id, objectPhotoPost) {
             if (!objectPhotoPost) {
                 return false;
             }
             if (id === undefined) {
                 return false;
             }
-            var index = allPosts.findIndex((element) => element.id === id);
+            var index = photoPost.findIndex((element) => element.id === id);
             if (index >= 0) {
-                var post = allPosts[index];
                 if (objectPhotoPost.hasOwnProperty('photoLink')) {
                     var editPhotoLink = document.getElementsByClassName('photo')[index];
                     editPhotoLink.src = objectPhotoPost.photoLink;
-                    post.photoLink = objectPhotoPost.photoLink;
                 }
                 if (objectPhotoPost.hasOwnProperty('description') && objectPhotoPost.description.length < 200) {
                     var editDescription = document.getElementsByClassName('description')[index];
                     editDescription.textContent = objectPhotoPost.description;
-                    post.description = objectPhotoPost.description;
                 }
                 if (objectPhotoPost.hasOwnProperty('hashTag')) {
                     var editHashTag = document.getElementsByClassName('hashTag')[index];
                     editHashTag.textContent = objectPhotoPost.hashTag;
-                    post.hashTag = objectPhotoPost.hashTag;
-                    for (var item = 0; item < objectPhotoPost.hashTag.length; item++) {
-                        addOptionToSelect(objectPhotoPost.hashTag[item], document.getElementById('hashTag'));
-                    }
                 }
-                allPosts[index] = post;
             }
-            return true;
-
         }
 
-        function removePhotoPost(id) {
-            var index = allPosts.findIndex((element) => element.id === id);
+        function removePhotoPost(photoPosts, id) {
+            var index = photoPosts.findIndex((element) => element.id === id);
             if (index >= 0) {
                 var container = document.querySelector('.site_content');
                 var deleteElem = document.getElementsByClassName('photo_post')[index];
                 container.removeChild(deleteElem);
-                allPosts.splice(index, 1);
-                return true;
-            } else {
-                return false;
             }
         }
 
@@ -303,16 +165,18 @@ var module = (function () {
         }
 
         return {
-            getPhotoPosts: getPhotoPosts,
+            pagination: pagination,
+            displayHtmlSignUp: displayHtmlSignUp,
             removePhotoPost: removePhotoPost,
             editPhotoPost: editPhotoPost,
             addPhotoPost: addPhotoPost,
             displayHtmlPhotoPosts: displayHtmlPhotoPosts,
-
+            displayHtmlButtonDownload: displayHtmlButtonDownload,
+            getLikes: getLikes
         }
     }
 )();
-console.log(module.displayHtmlPhotoPosts());
+//console.log(moduleDomScript.displayHtmlPhotoPosts());
 // console.log(module.getPhotoPosts(0, 10, {author: 'Adamskaya Yuliya'}));
 // console.log(module.removePhotoPost(1));
 // console.log(module.editPhotoPost(5, {description: 'newText', photoLink: 'images/22.jpg'}));
@@ -320,9 +184,10 @@ console.log(module.displayHtmlPhotoPosts());
 // console.log(module.addPhotoPost({
 //     id: 21,
 //     description: 'Text',
-//     createdAt: '12.03.2018',
+//     createdAt: '07.04.2018',
 //     author: 'Adamskaya Yuliya',
 //     photoLink: 'images/21.jpg',
-//     hashTag: ['#flowers']
+//     hashTag: ['#flowers'],
+//     like: ['']
 // }));
 

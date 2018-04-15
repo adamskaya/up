@@ -113,6 +113,8 @@ button {
 /*}*/
 
 #sign_out_sign_in{
+    text-decoration: none;
+
     font-size: 1.5vw;
     display: flex;
     margin-right: 2vw;
@@ -213,7 +215,7 @@ main {
 }
 
 .image_name_date {
-    width: 15vw;
+    width: 30vw;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -251,7 +253,7 @@ main {
     background-color: #fff;
 }
 
-#edit {
+.edit {
     display: flex;
     height: 1.3vw;
     width: 1.3vw;
@@ -268,16 +270,23 @@ main {
 
 .entry {
     display: inline-block;
+    float: left;
     width: 85%;
     height: auto;
     font-style: italic;
 }
 
-.put_like {
-    display: inline-block;
+.button_like {
     float: right;
-    width: 4vw;
+    width: 4.3vw;
+    height: 4.3vw;
     background-color: #fff;
+}
+
+.put_like {
+    background-color: #fff;
+    width: 4.2vw;
+    height: 4.2vw;
 }
 
 .hashTag {
@@ -287,19 +296,20 @@ main {
     color: gray;
 }
 
-.like {
+.users_like {
     width: 100%;
     display: inline-block;
     margin: 1vw 0.3vw 0 0;
     color: gray;
+    float: left;
 }
 
-.like p {
+.users_like p {
     width: auto;
     float: left;
 }
 
-.download {
+#download {
     display: inline-block;
     width: 100%;
     font-size: 1.5vw;
@@ -340,7 +350,7 @@ main {
     line-height: 2vw;
 }
 
-.name a {
+.button_add {
     font-size: 1.3vw;
     width: 100%;
     text-align: center;
@@ -350,6 +360,7 @@ main {
     color: #919191;
     background: #fff;
     margin: 0 0 1vw 0;
+    height: 2vw;
 }
 
 .line {
