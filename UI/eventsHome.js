@@ -30,18 +30,15 @@ var moduleEventsHome = (function () {
 
         function like(id, photoPosts) {
             var index = photoPosts.findIndex((element) => element.id === id);
-            var post = photoPosts[index];
             var user = JSON.parse(localStorage.getItem('user'));
-            if (!getLike(post, user)) {
-                post.like.push(user);
-                moduleDomScript.getLikes(index, post, user);
-                photoPosts[index] = post;
+            if (!getLike(photoPosts[index], user)) {
+                photoPosts[index].like.push(user);
+                moduleDomScript.getLikes(index, photoPosts[index], user);
                 return photoPosts;
             }
             else {
-                post.like.splice(post.like.findIndex((element) => element === user), 1);
-                moduleDomScript.getLikes(index, post, user);
-                photoPosts[index] = post;
+                photoPosts[index].like.splice(photoPosts[index].like.findIndex((element) => element === user), 1);
+                moduleDomScript.getLikes(index, photoPosts[index], user);
                 return photoPosts;
             }
 

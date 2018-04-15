@@ -178,13 +178,11 @@ var moduleScript = (function () {
                     photoPosts = photoPosts.filter((element) => element.author === filterConfig.author);
                 }
                 if (filterConfig.hashTag !== '') {
-                    var photoPostHashTag = [];
                     for (var index = 0; index < photoPosts.length; index++) {
                         if (photoPosts[index].hashTag.findIndex((element) => element === filterConfig.hashTag) >= 0) {
-                            photoPostHashTag.push(photoPosts[index]);
+                            photoPosts.push(photoPosts[index]);
                         }
                     }
-                    photoPosts = photoPostHashTag;
                 }
                 if (filterConfig.createdAt !== '') {
                     photoPosts = photoPosts.filter((element) => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
