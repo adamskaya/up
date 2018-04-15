@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marshmallows</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="logo">Marshmallows</div>
+    <div class="menu">
+        <a href="index.html" id="home">Home</a>
+        <form name = "search_form"  method="get" class="search">
+            <!--1search-->
+            <input name ="date" placeholder=" search by date...">
+            <!--2search-->
+            <input name = "username"  placeholder=" search by name...">
+            <!--3search-->
+            <select name="select" id = "hashTag" >
+                <option value="" hidden disabled selected>search hashTag...</option>
+                <option>#nature</option>
+                <option>#food</option>
+                <option>#coffe</option>
+                <option>#flowers</option>
+            </select>
+            <button type="submit" id="button_search"><img src="images/search.png"/></button>
+        </form>
+        <a href="" id ="sign_out_sign_in">Sign out</a>
+    </div>
+</header>
+<main>
+    <div class="site_content">
+        <!--&lt;!&ndash;1photo&ndash;&gt;-->
+        <!--<div class="photo_post">-->
+            <!--<div class="post">-->
+                <!--<div class="image_name_date">-->
+                    <!--<img class="post_image" src="images/103.png"/>-->
+                    <!--<p class="name">Murashko Yuliya</p>-->
+                    <!--<p class="date_post">06.03.2018</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<img class="photo" src="images/1_1.jpg">-->
+            <!--<div class="entry">-->
+                <!--<p class="description">Text...</p>-->
+                <!--<p class="hashTag">#coffe</p>-->
+                <!--<div class="like"><p>Like: </p>-->
+                    <!--<p>author1, author2</p>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<button type="button" class="put_like"><img src="images/heart1.png" alt="like"/></button>-->
+        <!--</div>-->
+        <!--<button type="button" class="download"><b>...</b></button>-->
+
+    </div>
+    <div class="avatar">
+        <img class="avatar_image" src="images/user.png"/>
+        <div class="name">
+            <p id="user">user</p>
+            <button class = "button_add"><i>Add post</i></button>
+            <div class="line"></div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="logo_footer">Marshmallows</div>
+    <div class="footer_icon">
+        <button type="button" class="vk"><img src="images/vk.png" alt="vk"/></button>
+        <button type="button" class="email"><img src="images/email.png" alt="email"/></button>
+        <button type="button" class="insta"><img src="images/insta.png" alt="instagram"/></button>
+    </div>
+    <p class="data">Adamskaya Yuliya 2 course 6 group<br>03.03.2018</p>
+</footer>
+<script src="script.js"></script>
+<script src="DOM.js"></script>
+<script src="eventsHome.js"></script>
+</body>
+</html>
+
