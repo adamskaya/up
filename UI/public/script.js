@@ -1,4 +1,4 @@
-var moduleScript = (function () {
+var Functional = (function () {
         var photoPosts = [{
             id: 1,
             description: 'Text',
@@ -178,11 +178,13 @@ var moduleScript = (function () {
                     photoPosts = photoPosts.filter((element) => element.author === filterConfig.author);
                 }
                 if (filterConfig.hashTag !== '') {
+                    var postFilterHashTag = [];
                     for (var index = 0; index < photoPosts.length; index++) {
                         if (photoPosts[index].hashTag.findIndex((element) => element === filterConfig.hashTag) >= 0) {
-                            photoPosts.push(photoPosts[index]);
+                            postFilterHashTag.push(photoPosts[index]);
                         }
                     }
+                    photoPosts = postFilterHashTag;
                 }
                 if (filterConfig.createdAt !== '') {
                     photoPosts = photoPosts.filter((element) => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
@@ -190,7 +192,6 @@ var moduleScript = (function () {
                 return photoPosts.slice(skip, skip + top);
             }
         }
-
         // function getPhotoPost(id) {
         //     return photoPosts.find((element) => element.id === id);
         // }
@@ -256,11 +257,11 @@ var moduleScript = (function () {
     }
 )
 ();
-// console.log(moduleScript.getPhotoPosts(0, 10));
-// console.log(moduleScript.getPhotoPosts(0, 10, {author: "Adamskaya Yuliya"}));
-// console.log(moduleScript.getPhotoPost('9'));
-// console.log(moduleScript.editPhotoPost('1', {hashTag: ['#hashtag_1', '#hashtag_8']}));
-// console.log(moduleScript.addPhotoPost({
+// console.log(Functional.getPhotoPosts(0, 10));
+// console.log(Functional.getPhotoPosts(0, 10, {author: "Adamskaya Yuliya"}));
+// console.log(Functional.getPhotoPost('9'));
+// console.log(Functional.editPhotoPost('1', {hashTag: ['#hashtag_1', '#hashtag_8']}));
+// console.log(Functional.addPhotoPost({
 //     id: 21,
 //     description: 'Text',
 //     createdAt: '07.04.2018',
@@ -269,4 +270,4 @@ var moduleScript = (function () {
 //     hashTag: ['#flowers'],
 //     like: ['']
 // }));
-// console.log(moduleScript.removePhotoPost('4'));
+// console.log(Functional.removePhotoPost('4'));

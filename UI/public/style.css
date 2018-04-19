@@ -112,7 +112,7 @@ button {
 /*font-family: FontAwesome;*/
 /*}*/
 
-#sign_out_sign_in{
+#sign_out_sign_in {
     text-decoration: none;
 
     font-size: 1.5vw;
@@ -143,12 +143,13 @@ main {
     margin-left: 15%;
 }
 
-.text_registration{
+.text_registration {
     display: inline-block;
     text-align: center;
     font-size: 1vw;
     color: #000;
 }
+
 .registration {
     align-items: center;
     flex-direction: column;
@@ -156,15 +157,17 @@ main {
     height: 70%;
     display: flex;
 }
+
 .userRegistration, .keyRegistration {
     display: flex;
     align-items: center;
 }
 
-.userRegistration img, .keyRegistration img{
+.userRegistration img, .keyRegistration img {
     width: 2.5vw;
     height: 2.5vw;
 }
+
 #username, #password {
 
     font-style: italic;
@@ -178,7 +181,7 @@ main {
 
 }
 
-#button_registration{
+#button_registration {
     height: 2vw;
     width: 8vw;
     text-align: center;
@@ -190,6 +193,7 @@ main {
     margin: 0.5vw;
 
 }
+
 /*Lenta*/
 .site_content {
     font-size: 1.2vw;
@@ -283,8 +287,16 @@ main {
     background-color: #fff;
 }
 
-.put_like {
-    background-color: #fff;
+.like {
+    background: url("images/heart1.png");
+    background-size: 100%;
+    width: 4.2vw;
+    height: 4.2vw;
+}
+
+.like-active {
+    background: url("images/heart2.png");
+    background-size: 100%;
     width: 4.2vw;
     height: 4.2vw;
 }
@@ -318,6 +330,21 @@ main {
     margin-bottom: 1.5vw;
     border-radius: 0;
     letter-spacing: 0.1vw;
+}
+
+.site_content.error {
+    display: flex;
+    background: #fff;
+    height: 25vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.error_text {
+    display: flex;
+    font-family: 'Cabin', sans-serif;
+    color: gray;
+    font-size: 1.5vw;
 }
 
 /*Avatar*/

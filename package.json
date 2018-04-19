@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/adamskaya/up#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "connect": "^3.6.6",
+    "express": "^4.16.3",
+    "http": "0.0.0"
   }
 }

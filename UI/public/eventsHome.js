@@ -1,24 +1,28 @@
-var moduleEventsHome = (function () {
+var Events = (function () {
 
         function addPhotoPostsToLocalStorage() {
-            // var users =[
-            //     {
-            //         username: 'Adamskaya Yuliya',
-            //         password: '111111'
-            //     },
-            //     {
-            //         username: 'Murashko Yuliya',
-            //         password: '222222'
-            //     },
-            //     {
-            //         username: 'Ambrosyonok Marina',
-            //         password: '333333'
-            //     }];
-            //localStorage.setItem('users', JSON.stringify(users));
-            //localStorage.setItem('my_application', JSON.stringify(moduleScript.photoPosts));
-            var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-            moduleDomScript.displayHtmlPhotoPosts(moduleScript.getPhotoPosts(photoPosts, 0, 10), JSON.parse(localStorage.getItem('user')));
-            moduleDomScript.displayHtmlButtonDownload(true);
+            var users =[
+                {
+                    username: 'Adamskaya Yuliya',
+                    password: '111111'
+                },
+                {
+                    username: 'Murashko Yuliya',
+                    password: '222222'
+                },
+                {
+                    username: 'Ambrosyonok Marina',
+                    password: '333333'
+                }];
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('my_application', JSON.stringify(Functional.photoPosts));
+            if (localStorage.getItem('my_application') === null) {
+                PostView.postsNullError();
+            } else {
+                var photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                PostView.displayHtmlPhotoPosts(Functional.getPhotoPosts(photoPosts, 0, 10), JSON.parse(localStorage.getItem('user')));
+                PostView.buildButtonDownload(true);
+            }
         }
 
         function getLike(post, user) {
@@ -29,16 +33,16 @@ var moduleEventsHome = (function () {
         }
 
         function like(id, photoPosts) {
-            var index = photoPosts.findIndex((element) => element.id === id);
+            var post = photoPosts.find((element) => element.id === id);
             var user = JSON.parse(localStorage.getItem('user'));
-            if (!getLike(photoPosts[index], user)) {
-                photoPosts[index].like.push(user);
-                moduleDomScript.getLikes(index, photoPosts[index], user);
+            if (!getLike(post, user)) {
+                post.like.push(user);
+                PostView.setLikes(photoPosts.findIndex((element) => element.id === id), post, user);
                 return photoPosts;
             }
             else {
-                photoPosts[index].like.splice(photoPosts[index].like.findIndex((element) => element === user), 1);
-                moduleDomScript.getLikes(index, photoPosts[index], user);
+                post.like.splice(post.like.findIndex((element) => element === user), 1);
+                PostView.setLikes(photoPosts.findIndex((element) => element.id === id), post, user);
                 return photoPosts;
             }
 
@@ -67,30 +71,34 @@ var moduleEventsHome = (function () {
                 var date = document.search_form.date.value;
                 var hashTag = document.search_form.select.value;
                 var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                photoPosts = moduleScript.getPhotoPosts(photoPosts, 0, photoPosts.length, {
+                photoPosts = Functional.getPhotoPosts(photoPosts, 0, photoPosts.length, {
                     author: username,
                     createdAt: date,
                     hashTag: hashTag
                 });
-                moduleDomScript.displayHtmlPhotoPosts(photoPosts, JSON.parse(localStorage.getItem('user')));
-                moduleDomScript.displayHtmlButtonDownload(false);
+                PostView.buildButtonDownload(false);
+                if (photoPosts.length) {
+                    PostView.displayHtmlPhotoPosts(photoPosts, JSON.parse(localStorage.getItem('user')));
+                } else {
+                    PostView.postsNullError(photoPosts);
+                }
                 event.preventDefault();
             });
 
             document.getElementById('download').addEventListener('click', (event) => {
                 addPhotoCountForPagination = addPhotoCountForPagination + 10;
                 var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                photoPosts = moduleScript.getPhotoPosts(photoPosts, addPhotoCountForPagination, 10);
-                moduleDomScript.pagination(photoPosts, JSON.parse(localStorage.getItem('user')));
+                photoPosts = Functional.getPhotoPosts(photoPosts, addPhotoCountForPagination, 10);
+                PostView.pagination(photoPosts, JSON.parse(localStorage.getItem('user')));
                 addPhotoCountForPagination--;
                 if (photoPosts.length < 10) {
-                    moduleDomScript.displayHtmlButtonDownload(false);
+                    PostView.buildButtonDownload(false);
                 }
             });
 
             document.getElementById('sign_out_sign_in').addEventListener('click', (event) => {
                 if (document.getElementById('sign_out_sign_in').textContent === 'Sign up') {
-                    moduleDomScript.displayHtmlSignUp();
+                    PostView.displaySignUpForm();
                     document.getElementById('button_registration').addEventListener('click', (event) => {
                         var username = document.registrationForm.username.value;
                         if (getUser(username) === undefined) {
@@ -117,30 +125,30 @@ var moduleEventsHome = (function () {
                 if (event.target.className === 'delete_post') {
                     var post = event.target.parentNode.parentNode.parentNode.parentNode;
                     var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                    moduleDomScript.removePhotoPost(moduleScript.getPhotoPosts(photoPosts, 0, 10), Number(post.getAttribute('data_post_id')));
-                    photoPosts = moduleScript.removePhotoPost(photoPosts, Number(post.getAttribute('data_post_id')));
+                    PostView.removePhotoPost(Functional.getPhotoPosts(photoPosts, 0, 10), Number(post.getAttribute('data_post_id')));
+                    photoPosts = Functional.removePhotoPost(photoPosts, Number(post.getAttribute('data_post_id')));
                     localStorage.setItem('my_application', JSON.stringify(photoPosts));
                     event.preventDefault();
                 }
                 if (event.target.className === 'edit_post') {
                     var post = event.target.parentNode.parentNode.parentNode.parentNode;
                     var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                    //moduleDomScript.displayHtmlAddPhotoPost();
+                    //PostView.displayHtmlAddPhotoPost();
                     var editPhotoPost = {
                         description: 'Text',
                         photoLink: 'images/22.jpg',
                         hashTag: ['#flowers'],
                     };
-                    moduleScript.editPhotoPost(photoPosts, Number(post.getAttribute('data_post_id')), editPhotoPost, editPhotoPost);
-                    moduleDomScript.editPhotoPost(moduleScript.getPhotoPosts(photoPosts, 0, 10), Number(post.getAttribute('data_post_id')), editPhotoPost);
+                    Functional.editPhotoPost(photoPosts, Number(post.getAttribute('data_post_id')), editPhotoPost, editPhotoPost);
+                    PostView.editPhotoPost(Functional.getPhotoPosts(photoPosts, 0, 10), Number(post.getAttribute('data_post_id')), editPhotoPost);
                     localStorage.setItem('my_application', JSON.stringify(photoPosts));
                     event.preventDefault();
                 }
-                if (event.target.className === 'like') {
+                if (event.target.className === 'like' || event.target.className === 'like-active') {
                     if (JSON.parse(localStorage.getItem('user'))) {
-                        var post = event.target.parentNode.parentNode.parentNode;
+                        var post = event.target.parentNode.parentNode;
                         var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                        photoPosts = moduleScript.getPhotoPosts(photoPosts, 0, photoPosts.length);
+                        photoPosts = Functional.getPhotoPosts(photoPosts, 0, photoPosts.length);
                         photoPosts = like(Number(post.getAttribute('data_post_id')), photoPosts);
                         localStorage.setItem('my_application', JSON.stringify(photoPosts));
                     }
@@ -149,7 +157,7 @@ var moduleEventsHome = (function () {
             var id = 21;
             document.querySelector('.avatar').addEventListener('click', (event) => {
                 var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                //moduleDomScript.displayHtmlAddPhotoPost();
+                //PostView.displayHtmlAddPhotoPost();
                 var newPhotoPost = {
                     id: id,
                     description: 'Text',
@@ -159,8 +167,8 @@ var moduleEventsHome = (function () {
                     hashTag: ['#nature'],
                     like: []
                 };
-                moduleScript.addPhotoPost(newPhotoPost, photoPosts);
-                moduleDomScript.addPhotoPost(newPhotoPost, JSON.parse(localStorage.getItem('user')));
+                Functional.addPhotoPost(newPhotoPost, photoPosts);
+                PostView.addPhotoPost(newPhotoPost, JSON.parse(localStorage.getItem('user')));
                 localStorage.setItem('my_application', JSON.stringify(photoPosts));
                 id = id + 1;
                 event.preventDefault();
@@ -173,8 +181,8 @@ var moduleEventsHome = (function () {
         }
     }
 )();
-console.log(moduleEventsHome.addPhotoPostsToLocalStorage());
-moduleEventsHome.events();
+console.log(Events.addPhotoPostsToLocalStorage());
+Events.events();
 //console.log(module.getPhotoPosts(0, 10, {hashTag: '#coffe'}));
 // console.log(module.removePhotoPost(21));
 // console.log(module.editPhotoPost(5, {description: 'newText', photoLink: 'images/22.jpg'}));
