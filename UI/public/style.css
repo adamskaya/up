@@ -70,7 +70,7 @@ header {
     display: flex;
 }
 
-.search {
+#search-form {
     width: 50%;
     display: flex;
     justify-content: space-around;
@@ -90,20 +90,13 @@ input, button, select {
 
 }
 
-/*#search_form1, #search_form2 {*/
-/*display: flex;*/
-/*width: auto;*/
-/*overflow: hidden;*/
-
-/*}*/
-
 button {
     display: flex;
     cursor: pointer;
     color: #000;
 }
 
-#button_search {
+#button-search {
     height: 2vw;
     width: 2vw;
 }
@@ -112,7 +105,7 @@ button {
 /*font-family: FontAwesome;*/
 /*}*/
 
-#sign_out_sign_in {
+#sign-out-sign-in {
     text-decoration: none;
 
     font-size: 1.5vw;
@@ -130,7 +123,7 @@ main {
 }
 
 /*Sign up*/
-.sign_up {
+.sign-up {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -143,14 +136,14 @@ main {
     margin-left: 15%;
 }
 
-.text_registration {
+.text-registration {
     display: inline-block;
     text-align: center;
     font-size: 1vw;
     color: #000;
 }
 
-.registration {
+#registration {
     align-items: center;
     flex-direction: column;
     width: 70%;
@@ -177,11 +170,11 @@ main {
     color: gray;
     background-color: #f3f3f4;
     border-radius: 0;
-    margin: 0.5vw 0vw;
+    margin: 0.5vw 0;
 
 }
 
-#button_registration {
+#button-registration {
     height: 2vw;
     width: 8vw;
     text-align: center;
@@ -195,7 +188,7 @@ main {
 }
 
 /*Lenta*/
-.site_content {
+.site-content {
     font-size: 1.2vw;
     line-height: 1;
     display: inline-block;
@@ -204,10 +197,14 @@ main {
     margin-left: 12%;
 }
 
-.photo_post {
+.photo-post {
     display: inline-block;
     background: #fff;
     margin-bottom: 1.5vw;
+}
+
+.photo-post.hide {
+    display: none;
 }
 
 .post {
@@ -218,7 +215,7 @@ main {
     align-items: center;
 }
 
-.image_name_date {
+.image-name-date {
     width: 30vw;
     display: flex;
     justify-content: flex-start;
@@ -231,19 +228,19 @@ main {
     font-weight: bold;
 }
 
-.post_image {
+.post-image {
     display: inline-block;
     float: left;
     width: 4vw;
 }
 
-.image_name_date p {
+.image-name-date p {
     margin: 0 0.5vw;
     width: auto;
     display: inline-block;
 }
 
-.delete_edit {
+.remove-edit {
     height: 3.5vw;
     flex-direction: column;
     display: flex;
@@ -280,7 +277,7 @@ main {
     font-style: italic;
 }
 
-.button_like {
+.button-like {
     float: right;
     width: 4.3vw;
     height: 4.3vw;
@@ -294,7 +291,7 @@ main {
     height: 4.2vw;
 }
 
-.like-active {
+.like.active {
     background: url("images/heart2.png");
     background-size: 100%;
     width: 4.2vw;
@@ -308,7 +305,7 @@ main {
     color: gray;
 }
 
-.users_like {
+.users-like {
     width: 100%;
     display: inline-block;
     margin: 1vw 0.3vw 0 0;
@@ -316,23 +313,28 @@ main {
     float: left;
 }
 
-.users_like p {
+.users-like p {
     width: auto;
     float: left;
 }
 
-#download {
+.download {
     display: inline-block;
-    width: 100%;
+    width: 63%;
     font-size: 1.5vw;
     color: #7D7D7D;
     background-color: #fff;
     margin-bottom: 1.5vw;
     border-radius: 0;
     letter-spacing: 0.1vw;
+    margin-left: 12%;
 }
 
-.site_content.error {
+.download.hide {
+    display: none;
+}
+
+.site-content.error {
     display: flex;
     background: #fff;
     height: 25vw;
@@ -340,7 +342,7 @@ main {
     justify-content: center;
 }
 
-.error_text {
+.error-text {
     display: flex;
     font-family: 'Cabin', sans-serif;
     color: gray;
@@ -377,7 +379,7 @@ main {
     line-height: 2vw;
 }
 
-.button_add {
+.button-add {
     font-size: 1.3vw;
     width: 100%;
     text-align: center;
@@ -405,7 +407,7 @@ footer {
     align-items: center;
 }
 
-.logo_footer {
+.logo-footer {
     display: flex;
     height: 2vw;
     font-size: 2vw;
@@ -413,7 +415,7 @@ footer {
     font-weight: bold;
 }
 
-.footer_icon {
+.footer-icon {
     display: flex;
     width: 9vw;
     justify-content: space-between;

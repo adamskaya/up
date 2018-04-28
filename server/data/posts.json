@@ -1,0 +1,74 @@
+[
+  {
+    "author": "Adamskaya Yuliya",
+    "createdAt": "2018-04-24T21:00:00.000Z",
+    "description": "TextNew",
+    "hashTag": [
+      "#nature",
+      "#flowers"
+    ],
+    "id": "1",
+    "like": [
+      "author1",
+      "author2"
+    ],
+    "photoLink": "images/20.jpg"
+  },
+  {
+    "author": "Murashko Yuliya",
+    "createdAt": "2018-04-25T21:00:00.000Z",
+    "description": "Text",
+    "hashTag": [
+      "#nature",
+      "#flowers"
+    ],
+    "id": "2",
+    "like": [
+      "author1",
+      "author3"
+    ],
+    "photoLink": "images/19_2.jpg"
+  },
+  {
+    "author": "Ambrosyonok Marina",
+    "createdAt": "2018-02-01T21:00:00.000Z",
+    "description": "Text",
+    "hashTag": [
+      "#coffe"
+    ],
+    "id": "3",
+    "like": [
+      "author2"
+    ],
+    "photoLink": "images/18.jpg"
+  },
+  {
+    "author": "Murashko Yuliya",
+    "createdAt": "2018-02-28T21:00:00.000Z",
+    "description": "Text",
+    "hashTag": [
+      "#food"
+    ],
+    "id": "8",
+    "like": [
+      "author1",
+      "author2",
+      "author3"
+    ],
+    "photoLink": "images/13.jpg"
+  },
+  {
+    "author": "Adamskaya Yuliya",
+    "createdAt": "2018-03-01T21:00:00.000Z",
+    "description": "Text",
+    "hashTag": [
+      "#food"
+    ],
+    "id": "5",
+    "like": [
+      "author1",
+      "author2"
+    ],
+    "photoLink": "images/16_1.jpg"
+  }
+]

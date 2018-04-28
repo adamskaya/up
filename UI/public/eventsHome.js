@@ -1,76 +1,87 @@
-var Events = (function () {
+let Events = (function () {
 
         function addPhotoPostsToLocalStorage() {
-            var users =[
-                {
-                    username: 'Adamskaya Yuliya',
-                    password: '111111'
-                },
-                {
-                    username: 'Murashko Yuliya',
-                    password: '222222'
-                },
-                {
-                    username: 'Ambrosyonok Marina',
-                    password: '333333'
-                }];
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('my_application', JSON.stringify(Functional.photoPosts));
-            if (localStorage.getItem('my_application') === null) {
-                PostView.postsNullError();
-            } else {
-                var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                PostView.displayHtmlPhotoPosts(Functional.getPhotoPosts(photoPosts, 0, 10), JSON.parse(localStorage.getItem('user')));
-                PostView.buildButtonDownload(true);
-            }
+            // let users = [
+            //     {
+            //         username: 'Adamskaya Yuliya',
+            //         password: '111111'
+            //     },
+            //     {
+            //         username: 'Murashko Yuliya',
+            //         password: '222222'
+            //     },
+            //     {
+            //         username: 'Ambrosyonok Marina',
+            //         password: '333333'
+            //     }];
+            // localStorage.setItem('users', JSON.stringify(users));
+            // localStorage.setItem('my_application', JSON.stringify(Functional.photoPosts));
+            // localStorage.setItem('hashTag', JSON.stringify(PostView.setHashTag()));
+            // if (localStorage.getItem('my_application') === null) {
+            //     PostView.postsNullError();
+            // } else {
+            let photoPosts = JSON.parse(localStorage.getItem('my_application'));
+            let user = JSON.parse(localStorage.getItem('user'));
+            PostView.displayHtmlPhotoPosts(Functional.getPhotoPosts(photoPosts, 0, 10), user, JSON.parse(localStorage.getItem('hashTag')));
+            PostView.setUser(user);
+            PostView.buildButtonDownload(true);
+            //}
         }
 
-        function getLike(post, user) {
-            if (post.like.findIndex((element) => element === user) >= 0) {
-                return true;
-            }
-            return false;
-        }
-
-        function like(id, photoPosts) {
-            var post = photoPosts.find((element) => element.id === id);
-            var user = JSON.parse(localStorage.getItem('user'));
-            if (!getLike(post, user)) {
+        function like(id, photoPosts, photoPost) {
+            let post = photoPosts.find((element) => element.id === id);
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!Functional.isLikedByUser(post.like, user)) {
                 post.like.push(user);
-                PostView.setLikes(photoPosts.findIndex((element) => element.id === id), post, user);
-                return photoPosts;
+                PostView.setLikes(user, photoPost, post.like);
             }
             else {
                 post.like.splice(post.like.findIndex((element) => element === user), 1);
-                PostView.setLikes(photoPosts.findIndex((element) => element.id === id), post, user);
-                return photoPosts;
-            }
+                PostView.setLikes(user, photoPost, post.like);
 
+            }
         }
 
         function getUser(name) {
-            var users = JSON.parse(localStorage.getItem('users'));
-            return (users.find((user) => {
-                return user.username === name;
-            }));
-        }
-
-        function getPassword(name) {
-            var users = JSON.parse(localStorage.getItem('users'));
-            var index = users.findIndex((element) => element.username === name);
+            const users = JSON.parse(localStorage.getItem('users'));
+            let index = users.findIndex((element) => element.username === name);
             if (index >= 0) {
-                return users[index].password;
+                return users[index];
             }
         }
 
-        var addPhotoCountForPagination = 0;
+        function getRegistrationData() {
+            document.getElementById('button-registration').addEventListener('click', (event) => {
+                const registrationForm = document.getElementById('registration');
+                const formData = new FormData(registrationForm);
+                const username = formData.get('username');
+                if (getUser(username) === undefined) {
+                    alert("Incorrect username!");
+                    event.preventDefault();
+                } else {
+                    const password = formData.get('password');
+                    if (password === getUser(username).password) {
+                        localStorage.setItem('user', JSON.stringify(username));
+                    } else {
+                        alert("Incorrect password!");
+                        event.preventDefault();
+                    }
+                }
+            });
+            event.preventDefault();
+        }
 
-        function events() {
-            document.getElementById('button_search').addEventListener('click', (event) => {
-                var username = document.search_form.username.value;
-                var date = document.search_form.date.value;
-                var hashTag = document.search_form.select.value;
-                var photoPosts = JSON.parse(localStorage.getItem('my_application'));
+        let addPhotoCountForPagination = 0;
+
+        function bindEvents() {
+            document.getElementById('button-search').addEventListener('click', (event) => {
+                const searchForm = document.getElementById('search-form');
+                const searchFormData = new FormData(searchForm);
+                const date = searchFormData.get('date');
+                const username = searchFormData.get('username');
+                const hashTag = searchFormData.get('select');
+                let user = JSON.parse(localStorage.getItem('user'));
+                let photoPosts = JSON.parse(localStorage.getItem('my_application'));
                 photoPosts = Functional.getPhotoPosts(photoPosts, 0, photoPosts.length, {
                     author: username,
                     createdAt: date,
@@ -78,123 +89,96 @@ var Events = (function () {
                 });
                 PostView.buildButtonDownload(false);
                 if (photoPosts.length) {
-                    PostView.displayHtmlPhotoPosts(photoPosts, JSON.parse(localStorage.getItem('user')));
+                    PostView.displayHtmlPhotoPosts(photoPosts, user);
+                    PostView.setUser(user);
                 } else {
                     PostView.postsNullError(photoPosts);
                 }
                 event.preventDefault();
             });
 
-            document.getElementById('download').addEventListener('click', (event) => {
+            document.querySelector('.download').addEventListener('click', (event) => {
                 addPhotoCountForPagination = addPhotoCountForPagination + 10;
-                var photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                let photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                let user = JSON.parse(localStorage.getItem('user'));
                 photoPosts = Functional.getPhotoPosts(photoPosts, addPhotoCountForPagination, 10);
-                PostView.pagination(photoPosts, JSON.parse(localStorage.getItem('user')));
-                addPhotoCountForPagination--;
+                PostView.pagination(photoPosts, user);
                 if (photoPosts.length < 10) {
                     PostView.buildButtonDownload(false);
                 }
             });
 
-            document.getElementById('sign_out_sign_in').addEventListener('click', (event) => {
-                if (document.getElementById('sign_out_sign_in').textContent === 'Sign up') {
+            document.getElementById('sign-out-sign-in').addEventListener('click', (event) => {
+                if (document.getElementById('sign-out-sign-in').textContent === 'Sign up') {
                     PostView.displaySignUpForm();
-                    document.getElementById('button_registration').addEventListener('click', (event) => {
-                        var username = document.registrationForm.username.value;
-                        if (getUser(username) === undefined) {
-                            alert("Incorrect username!");
-                            event.preventDefault();
-                        } else {
-                            var password = document.registrationForm.password.value;
-                            if (password === getPassword(username)) {
-                                localStorage.setItem('user', JSON.stringify(username));
-                            } else {
-                                alert("Incorrect password!");
-                                event.preventDefault();
-                            }
-                        }
-                    });
-                    event.preventDefault();
+                    PostView.buildButtonDownload(false);
+                    getRegistrationData();
                 }
-                if (document.getElementById('sign_out_sign_in').textContent === 'Sign out') {
+                if (document.getElementById('sign-out-sign-in').textContent === 'Sign out') {
                     localStorage.setItem('user', JSON.stringify(null));
                 }
             });
 
-            document.querySelector('.site_content').addEventListener('click', (event) => {
-                if (event.target.className === 'delete_post') {
-                    var post = event.target.parentNode.parentNode.parentNode.parentNode;
-                    var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                    PostView.removePhotoPost(Functional.getPhotoPosts(photoPosts, 0, 10), Number(post.getAttribute('data_post_id')));
-                    photoPosts = Functional.removePhotoPost(photoPosts, Number(post.getAttribute('data_post_id')));
+            document.querySelector('.site-content').addEventListener('click', (event) => {
+                let photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                if (event.target.className === 'remove-post') {
+                    let post = event.target.closest('.photo-post');
+                    const id = Number(post.getAttribute('data-post-id'));
+                    PostView.removePhotoPost(post);
+                    photoPosts = Functional.removePhotoPost(photoPosts, id);
                     localStorage.setItem('my_application', JSON.stringify(photoPosts));
-                    event.preventDefault();
                 }
-                if (event.target.className === 'edit_post') {
-                    var post = event.target.parentNode.parentNode.parentNode.parentNode;
-                    var photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                if (event.target.className === 'edit-post') {
+                    let post = event.target.closest('.photo-post');
+                    const id = Number(post.getAttribute('data-post-id'));
                     //PostView.displayHtmlAddPhotoPost();
-                    var editPhotoPost = {
-                        description: 'Text',
+                    let editPhotoPost = {
+                        description: 'newText',
                         photoLink: 'images/22.jpg',
-                        hashTag: ['#flowers'],
+                        hashTag: ['#town'],
                     };
-                    Functional.editPhotoPost(photoPosts, Number(post.getAttribute('data_post_id')), editPhotoPost, editPhotoPost);
-                    PostView.editPhotoPost(Functional.getPhotoPosts(photoPosts, 0, 10), Number(post.getAttribute('data_post_id')), editPhotoPost);
+                    Functional.editPhotoPost(photoPosts, id, editPhotoPost);
+                    PostView.editPhotoPost(post, editPhotoPost);
+                    localStorage.setItem('hashTag', JSON.stringify(PostView.setHashTag()));
                     localStorage.setItem('my_application', JSON.stringify(photoPosts));
-                    event.preventDefault();
                 }
-                if (event.target.className === 'like' || event.target.className === 'like-active') {
+
+                if (event.target.classList.contains('like')) {
                     if (JSON.parse(localStorage.getItem('user'))) {
-                        var post = event.target.parentNode.parentNode;
-                        var photoPosts = JSON.parse(localStorage.getItem('my_application'));
-                        photoPosts = Functional.getPhotoPosts(photoPosts, 0, photoPosts.length);
-                        photoPosts = like(Number(post.getAttribute('data_post_id')), photoPosts);
+                        let post = event.target.closest('.photo-post');
+                        const id = Number(post.getAttribute('data-post-id'));
+                        like(id, photoPosts, post);
                         localStorage.setItem('my_application', JSON.stringify(photoPosts));
                     }
                 }
             });
-            var id = 21;
             document.querySelector('.avatar').addEventListener('click', (event) => {
-                var photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                let photoPosts = JSON.parse(localStorage.getItem('my_application'));
+                let user = JSON.parse(localStorage.getItem('user'));
                 //PostView.displayHtmlAddPhotoPost();
-                var newPhotoPost = {
-                    id: id,
+                let newPhotoPost = {
+                    id: photoPosts.length + 1,
                     description: 'Text',
                     createdAt: new Date(2018, 4, 20),
-                    author: JSON.parse(localStorage.getItem('user')),
+                    author: user,
                     photoLink: 'images/21.jpg',
-                    hashTag: ['#nature'],
+                    hashTag: ['#bird'],
                     like: []
                 };
                 Functional.addPhotoPost(newPhotoPost, photoPosts);
-                PostView.addPhotoPost(newPhotoPost, JSON.parse(localStorage.getItem('user')));
+                PostView.addPhotoPost(photoPosts, newPhotoPost, user);
+                localStorage.setItem('hashTag', JSON.stringify(PostView.setHashTag()));
                 localStorage.setItem('my_application', JSON.stringify(photoPosts));
-                id = id + 1;
-                event.preventDefault();
             });
         }
 
         return {
-            events: events,
+            bindEvents: bindEvents,
             addPhotoPostsToLocalStorage: addPhotoPostsToLocalStorage,
         }
     }
 )();
 console.log(Events.addPhotoPostsToLocalStorage());
-Events.events();
-//console.log(module.getPhotoPosts(0, 10, {hashTag: '#coffe'}));
-// console.log(module.removePhotoPost(21));
-// console.log(module.editPhotoPost(5, {description: 'newText', photoLink: 'images/22.jpg'}));
-// console.log(module.editPhotoPost(3, {hashTag: ['#otherHashtag1', '#otherHashtag2']}));
-// console.log(module.addPhotoPost({
-//     id: 21,
-//     description: 'Text',
-//     createdAt: '07.04.2018',
-//     author: 'Adamskaya Yuliya',
-//     photoLink: 'images/21.jpg',
-//     hashTag: ['#flowers'],
-//     like: ['']
-// }));
+Events.bindEvents();
 
 

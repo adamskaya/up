@@ -1,80 +1,73 @@
-var PostView = (function () {
+let PostView = (function () {
 
         function setUser(user) {
             if (user === null) {
                 if (document.querySelector('.avatar')) {
                     document.querySelector('main').removeChild(document.querySelector('.avatar'));
-                    document.getElementById('sign_out_sign_in').textContent = 'Sign up';
+                    document.getElementById('sign-out-sign-in').textContent = 'Sign up';
                 }
             } else {
-                var userName = document.getElementById('user');
+                let userName = document.getElementById('user');
                 userName.textContent = user;
             }
         }
 
-        function isLiked(likes, user) {
-            if (likes.findIndex((element) => element === user) >= 0) {
-                return true;
-            }
-            return false;
-        }
-
-        function setLikes(index, post, user) {
-            if (!isLiked(post.like, user)) {
-                document.getElementsByClassName('button_like')[index].lastElementChild.className = 'like';
+        function setLikes(user, photoPost, likes) {
+            if (Functional.isLikedByUser(likes, user)) {
+                photoPost.querySelector('.like').classList.add('active');
             } else {
-                document.getElementsByClassName('button_like')[index].lastElementChild.className = 'like-active';
+                photoPost.querySelector('.like').classList.remove('active');
             }
-            document.getElementsByClassName('number_of_likes')[index].textContent = post.like.length;
+            photoPost.querySelector('.number-of-likes').textContent = likes.length;
         }
 
         function buildPhotoPost(objectPhotoPost, user) {
-            var photoPost = document.createElement('div');
-            photoPost.className = 'photo_post';
-            photoPost.setAttribute('data_post_id', objectPhotoPost.id);
+            let photoPost = document.createElement('div');
+            photoPost.className = 'photo-post';
+            photoPost.setAttribute('data-post-id', objectPhotoPost.id);
             photoPost.innerHTML = `
             <div class="post">
-                <div class="image_name_date">
-                    <img class="post_image" src="images/avatar.png"/>
+                <div class="image-name-date">
+                    <img class="post-image" src="images/avatar.png"/>
                     <p class="name">${objectPhotoPost.author}</p>
-                    <p class="date_post">${new Date(objectPhotoPost.createdAt).toLocaleDateString()}</p>
+                    <p class="date-post">${new Date(objectPhotoPost.createdAt).toLocaleDateString()}</p>
                 </div>
              </div>
             <img class="photo" src="${ objectPhotoPost.photoLink}">
             <div class="entry">
                 <p class="description">${objectPhotoPost.description}</p>
                 <p class="hashTag">${objectPhotoPost.hashTag}</p>
-                    <div class="users_like">
+                    <div class="users-like">
                         <p>Likes:</p>
-                        <p class = "number_of_likes"> ${objectPhotoPost.like.length}</p>
+                        <p class = "number-of-likes"> ${objectPhotoPost.like.length}</p>
                     </div>
             </div>
-            <div class = 'button_like'>
-                <div class="like${isLiked(objectPhotoPost.like, user) ? '-active' : ''}">
+            <div class = 'button-like'>
+                <div id = "likes" class="like${Functional.isLikedByUser(objectPhotoPost.like, user) ? ' active' : ''}">
                 </div>
             </div>`;
             if (objectPhotoPost.author === user) {
-                var edit_delete = document.createElement("div");
-                edit_delete.className = 'delete_edit';
-                edit_delete.innerHTML = `
+                let editRemove = document.createElement("div");
+                editRemove.className = 'remove-edit';
+                editRemove.innerHTML = `
                 <button  type="button" class="delete" >
-                    <img src="images/delete.png" class="delete_post"/>
+                    <img src="images/delete.png" class="remove-post"/>
                 </button>
                 <button type="button" class="edit">
-                    <img src="images/edit.png" class="edit_post"/>
+                    <img src="images/edit.png" class="edit-post"/>
                 </button>`;
-                photoPost.querySelector('.post').appendChild(edit_delete);
+                photoPost.querySelector('.post').appendChild(editRemove);
             }
             return photoPost;
         }
 
         function displaySignUpForm() {
             document.querySelector('form').innerHTML = '';
-            document.querySelector('main').removeChild(document.querySelector('.site_content'));
-            var signUp = document.createElement('div');
-            signUp.className = 'sign_up';
+            document.querySelector('main').removeChild(document.querySelector('.site-content'));
+            let signUp = document.createElement('div');
+            signUp.className = 'sign-up';
             signUp.innerHTML = `
-            <form name="registrationForm" action="" class="registration">
+            <form name="registrationForm" action="" id="registration">
                 <div class="userRegistration">
                     <img src="images/userRegistration.png"/>
                         <input name="username" id="username" placeholder=" Username...">
@@ -83,117 +76,121 @@ var PostView = (function () {
                     <img src="images/keyRegistration.png"/>
                     <input name="password" id="password" placeholder=" Password...">
                 </div>
-                <button type="submit" id="button_registration" value="Sign up">
+                <button type="submit" id="button-registration" value="Sign up">
                     <a href="index.html"> Sign up</a>
                 </button>
             </form>`;
             document.querySelector('main').appendChild(signUp);
         }
 
-        function displayHtmlAddPhotoPost() {
-            document.querySelector('main').removeChild(document.querySelector('.avatar'));
-            document.querySelector('form').innerHTML = '';
-            document.querySelector('main').removeChild(document.querySelector('.site_content'));
-            var addPhotoPost = document.createElement('div');
-            addPhotoPost.className = 'add_post';
-            document.querySelector('main').appendChild(addPhotoPost);
-        }
+        // function displayHtmlAddPhotoPost() {
+        //     document.querySelector('main').removeChild(document.querySelector('.avatar'));
+        //     document.querySelector('form').innerHTML = '';
+        //     document.querySelector('main').removeChild(document.querySelector('.site-content'));
+        //     let addPhotoPost = document.createElement('div');
+        //     addPhotoPost.className = 'add_post';
+        //     document.querySelector('main').appendChild(addPhotoPost);
+        // }
 
-        function postsNullError(photoPost){
-            if(photoPost !== undefined) {
-                document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
-                for (var index = 0; index < document.getElementsByClassName('photo_post').length; index++) {
-                    document.getElementsByClassName('photo_post')[index].innerHTML = '';
+        function postsNullError(photoPost) {
+            const posts = document.getElementsByClassName('photo-post');
+            const container = document.querySelector('.site-content');
+            if (photoPost !== undefined) {
+                container.removeChild(container.lastChild);
+                for (let index = 0; index < posts.length; index++) {
+                    posts[index].innerHTML = '';
                 }
             }
-            document.querySelector('.site_content').classList.add('error');
-            var textError = document.createElement("div");
-            textError.className = 'error_text';
+            container.classList.add('error');
+            let textError = document.createElement("div");
+            textError.className = 'error-text';
             textError.textContent = 'PhotoPosts not found!';
-            document.querySelector('.site_content').appendChild(textError);
+            container.appendChild(textError);
         }
+
         function buildButtonDownload(flag) {
             if (flag) {
-                var downloadButton = document.createElement("div");
-                downloadButton.innerHTML = `
-                <button type="button" id="download">    
-                    <b>...</b>
-                </button>`;
-                document.querySelector('.site_content').insertBefore(downloadButton, document.querySelector('.site_content').lastChild);
-            }
-            else {
-                document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
+                document.querySelector('.download').classList.remove('hide');
+            } else {
+                document.querySelector('.download').classList.add('hide');
             }
         }
 
         function pagination(photoPosts, user) {
-            document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
-            for (var index = 0; index < photoPosts.length; index++) {
-                document.querySelector('.site_content').insertBefore(buildPhotoPost(photoPosts[index], user), document.querySelector('.site_content').lastChild);
-            }
-
+            const container = document.querySelector('.site-content');
+            photoPosts.forEach(function (item) {
+                container.insertBefore(buildPhotoPost(item, user), container.lastChild);
+            });
         }
 
-        function addPhotoPost(objectPhotoPost, user) {
-            document.querySelector('.site_content').insertBefore(buildPhotoPost(objectPhotoPost, user), document.querySelector('.site_content').firstChild);
-            if (objectPhotoPost.hashTag !== '') {
-                for (var index = 0; index < objectPhotoPost.hashTag.length; index++) {
-                    addOptionToSelect(objectPhotoPost.hashTag[index], document.getElementById('hashTag'));
-                }
+        function addPhotoPost(photoPosts, objectPhotoPost, user) {
+            const container = document.querySelector('.site-content');
+            container.insertBefore(buildPhotoPost(objectPhotoPost, user), container.firstChild);
+            if (objectPhotoPost.hashTag.length !== 0) {
+                objectPhotoPost.hashTag.forEach(function (item) {
+                    addOptionToSelect(item, document.getElementById('hashTag'));
+                });
             }
         }
 
-        function displayHtmlPhotoPosts(photoPosts, user) {
-            for (var index = 0; index < document.getElementsByClassName('photo_post').length; index++) {
-                document.getElementsByClassName('photo_post')[index].innerHTML = '';
+        function displayHtmlPhotoPosts(photoPosts, user, hashTags) {
+            const posts = document.getElementsByClassName('photo-post');
+            const container = document.querySelector('.site-content');
+            for (let index = 0; index < posts.length; index++) {
+                posts[index].innerHTML = '';
             }
-            if (document.getElementById('download')) {
-                document.querySelector('.site_content').removeChild(document.querySelector('.site_content').lastChild);
+            photoPosts.forEach(function (item) {
+                container.insertBefore(buildPhotoPost(item, user), container.lastChild);
+            });
+            if (hashTags) {
+                hashTags.forEach(function (item) {
+                    addOptionToSelect(item, document.getElementById('hashTag'));
+                });
             }
-            setUser(user);
-            for (var index = 0; index < photoPosts.length; index++) {
-                document.querySelector('.site_content').insertBefore(buildPhotoPost(photoPosts[index], user), document.querySelector('.site_content').lastChild);
-            }
-
         }
 
-        function editPhotoPost(photoPost, id, objectPhotoPost) {
+        function editPhotoPost(post, objectPhotoPost) {
             if (!objectPhotoPost) {
                 return false;
             }
-            if (id === undefined) {
-                return false;
+            if (objectPhotoPost.hasOwnProperty('photoLink')) {
+                let editPhotoLink = post.querySelector('.photo');
+                editPhotoLink.src = objectPhotoPost.photoLink;
             }
-            var index = photoPost.findIndex((element) => element.id === id);
-            if (index >= 0) {
-                if (objectPhotoPost.hasOwnProperty('photoLink')) {
-                    var editPhotoLink = document.getElementsByClassName('photo')[index];
-                    editPhotoLink.src = objectPhotoPost.photoLink;
-                }
-                if (objectPhotoPost.hasOwnProperty('description') && objectPhotoPost.description.length < 200) {
-                    var editDescription = document.getElementsByClassName('description')[index];
-                    editDescription.textContent = objectPhotoPost.description;
-                }
-                if (objectPhotoPost.hasOwnProperty('hashTag')) {
-                    var editHashTag = document.getElementsByClassName('hashTag')[index];
-                    editHashTag.textContent = objectPhotoPost.hashTag;
-                }
+            if (objectPhotoPost.hasOwnProperty('description') && objectPhotoPost.description.length < 200) {
+                let editDescription = post.querySelector('.description');
+                editDescription.textContent = objectPhotoPost.description;
+            }
+            if (objectPhotoPost.hasOwnProperty('hashTag')) {
+                let editHashTag = post.querySelector('.hashTag');
+                editHashTag.textContent = objectPhotoPost.hashTag;
+            }
+            if (objectPhotoPost.hashTag.length !== 0) {
+                objectPhotoPost.hashTag.forEach(function (item) {
+                    addOptionToSelect(item, document.getElementById('hashTag'));
+                });
             }
         }
 
-        function removePhotoPost(photoPosts, id) {
-            var index = photoPosts.findIndex((element) => element.id === id);
-            if (index >= 0) {
-                var container = document.querySelector('.site_content');
-                var deleteElem = document.getElementsByClassName('photo_post')[index];
-                container.removeChild(deleteElem);
-            }
+        function removePhotoPost(post) {
+                post.classList.add('hide');
         }
 
         function addOptionToSelect(elementArr, select) {
-            var option = document.createElement('option');
-            option.innerHTML = elementArr;
-            select.appendChild(option);
+            let options = document.createElement('option');
+            if (!Functional.getHashTag(elementArr, setHashTag())) {
+                options.innerHTML = elementArr;
+                select.appendChild(options);
+            }
+        }
+
+        function setHashTag() {
+            let hashTags = [];
+            let options = document.querySelector('select');
+            for (let index = 1; index < options.length; index++) {
+                hashTags.push(options[index].value);
+            }
+            return hashTags;
         }
 
         return {
@@ -204,23 +201,12 @@ var PostView = (function () {
             addPhotoPost: addPhotoPost,
             displayHtmlPhotoPosts: displayHtmlPhotoPosts,
             buildButtonDownload: buildButtonDownload,
+            postsNullError: postsNullError,
             setLikes: setLikes,
-            postsNullError: postsNullError
+            setHashTag: setHashTag,
+            setUser:setUser
         }
     }
 )();
-//console.log(PostView.displayHtmlPhotoPosts());
-// console.log(module.getPhotoPosts(0, 10, {author: 'Adamskaya Yuliya'}));
-// console.log(module.removePhotoPost(1));
-// console.log(module.editPhotoPost(5, {description: 'newText', photoLink: 'images/22.jpg'}));
-// console.log(module.editPhotoPost(2, {hashTag: ['#otherHashtag1', '#otherHashtag2']}));
-// console.log(module.addPhotoPost({
-//     id: 21,
-//     description: 'Text',
-//     createdAt: '07.04.2018',
-//     author: 'Adamskaya Yuliya',
-//     photoLink: 'images/21.jpg',
-//     hashTag: ['#flowers'],
-//     like: ['']
-// }));
+
 

@@ -1,8 +1,8 @@
-var Functional = (function () {
-        var photoPosts = [{
+let Functional = (function () {
+        let photoPosts = [{
             id: 1,
             description: 'Text',
-            createdAt: new Date(2018,3,25),
+            createdAt: new Date(2018, 3, 25),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/20.jpg',
             hashTag: ['#nature', '#flowers'],
@@ -10,7 +10,7 @@ var Functional = (function () {
         }, {
             id: 2,
             description: 'Text',
-            createdAt: new Date(2018,3,26),
+            createdAt: new Date(2018, 3, 26),
             author: 'Murashko Yuliya',
             photoLink: 'images/19_2.jpg',
             hashTag: ['#nature', '#flowers'],
@@ -18,7 +18,7 @@ var Functional = (function () {
         }, {
             id: 3,
             description: 'Text',
-            createdAt: new Date(2018,1,2),
+            createdAt: new Date(2018, 1, 2),
             author: 'Ambrosyonok Marina',
             photoLink: 'images/18.jpg',
             hashTag: ['#coffe'],
@@ -26,7 +26,7 @@ var Functional = (function () {
         }, {
             id: 4,
             description: 'Text',
-            createdAt: new Date(2018,1,27),
+            createdAt: new Date(2018, 1, 27),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/17.jpg',
             hashTag: ['#coffe'],
@@ -34,7 +34,7 @@ var Functional = (function () {
         }, {
             id: 5,
             description: 'Text',
-            createdAt: new Date(2018,2,2),
+            createdAt: new Date(2018, 2, 2),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/16_1.jpg',
             hashTag: ['#food'],
@@ -42,7 +42,7 @@ var Functional = (function () {
         }, {
             id: 6,
             description: 'Text',
-            createdAt: new Date(2018,1,10),
+            createdAt: new Date(2018, 1, 10),
             author: 'Ambrosyonok Marina',
             photoLink: 'images/15.jpg',
             hashTag: ['#flowers'],
@@ -50,7 +50,7 @@ var Functional = (function () {
         }, {
             id: 7,
             description: 'Text',
-            createdAt: new Date(2018,3,3),
+            createdAt: new Date(2018, 3, 3),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/14.jpg',
             hashTag: ['#food'],
@@ -58,7 +58,7 @@ var Functional = (function () {
         }, {
             id: 8,
             description: 'Text',
-            createdAt: new Date(2018,2,1),
+            createdAt: new Date(2018, 2, 1),
             author: 'Murashko Yuliya',
             photoLink: 'images/13.jpg',
             hashTag: ['#food'],
@@ -66,7 +66,7 @@ var Functional = (function () {
         }, {
             id: 9,
             description: 'Text',
-            createdAt: new Date(2018,2,10),
+            createdAt: new Date(2018, 2, 10),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/12.jpg',
             hashTag: ['#flowers'],
@@ -74,7 +74,7 @@ var Functional = (function () {
         }, {
             id: 10,
             description: 'Text',
-            createdAt: new Date(2018,2,20),
+            createdAt: new Date(2018, 2, 20),
             author: 'Murashko Yuliya',
             photoLink: 'images/11.jpg',
             hashTag: ['#food'],
@@ -82,7 +82,7 @@ var Functional = (function () {
         }, {
             id: 11,
             description: 'Text',
-            createdAt: new Date(2018,2,12),
+            createdAt: new Date(2018, 2, 12),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/10.jpg',
             hashTag: ['#nature'],
@@ -90,7 +90,7 @@ var Functional = (function () {
         }, {
             id: 12,
             description: 'Text',
-            createdAt: new Date(2018,3,13),
+            createdAt: new Date(2018, 3, 13),
             author: 'Ambrosyonok Marina',
             photoLink: 'images/9.jpg',
             hashTag: ['#food'],
@@ -98,7 +98,7 @@ var Functional = (function () {
         }, {
             id: 13,
             description: 'Text',
-            createdAt: new Date(2018,3,15),
+            createdAt: new Date(2018, 3, 15),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/8.jpg',
             hashTag: ['#flowers'],
@@ -106,7 +106,7 @@ var Functional = (function () {
         }, {
             id: 14,
             description: 'Text',
-            createdAt: new Date(2018,2,25),
+            createdAt: new Date(2018, 2, 25),
             author: 'Murashko Yuliya',
             photoLink: 'images/7_1.jpg',
             hashTag: [],
@@ -114,7 +114,7 @@ var Functional = (function () {
         }, {
             id: 15,
             description: 'Text',
-            createdAt: new Date(2018,2,28),
+            createdAt: new Date(2018, 2, 28),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/6.jpg',
             hashTag: ['#coffe'],
@@ -122,7 +122,7 @@ var Functional = (function () {
         }, {
             id: 16,
             description: 'Text',
-            createdAt: new Date(2018,3,12),
+            createdAt: new Date(2018, 3, 12),
             author: 'Ambrosyonok Marina',
             photoLink: 'images/5_1.jpg',
             hashTag: ['#flowers', '#nature'],
@@ -130,7 +130,7 @@ var Functional = (function () {
         }, {
             id: 17,
             description: 'Text',
-            createdAt: new Date(2018,3,1),
+            createdAt: new Date(2018, 3, 1),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/1.jpg',
             hashTag: ['#food'],
@@ -138,7 +138,7 @@ var Functional = (function () {
         }, {
             id: 18,
             description: 'Text',
-            createdAt: new Date(2018,4,3),
+            createdAt: new Date(2018, 4, 3),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/3.jpg',
             hashTag: ['#food'],
@@ -146,7 +146,7 @@ var Functional = (function () {
         }, {
             id: 19,
             description: 'Text',
-            createdAt: new Date(2018,3,5),
+            createdAt: new Date(2018, 3, 5),
             author: 'Adamskaya Yuliya',
             photoLink: 'images/2.jpg',
             hashTag: ['#nature'],
@@ -154,7 +154,7 @@ var Functional = (function () {
         }, {
             id: 20,
             description: 'Text',
-            createdAt: new Date(2018,4,12),
+            createdAt: new Date(2018, 4, 12),
             author: 'Murashko Yuliya',
             photoLink: 'images/1_1.jpg',
             hashTag: ['#coffe'],
@@ -163,7 +163,7 @@ var Functional = (function () {
 
 
         function compareDate(a, b) {
-            return new Date(b.createdAt) -  new Date(a.createdAt);
+            return new Date(b.createdAt) - new Date(a.createdAt);
         }
 
         function getPhotoPosts(photoPosts, skip, top, filterConfig) {
@@ -178,12 +178,12 @@ var Functional = (function () {
                     photoPosts = photoPosts.filter((element) => element.author === filterConfig.author);
                 }
                 if (filterConfig.hashTag !== '') {
-                    var postFilterHashTag = [];
-                    for (var index = 0; index < photoPosts.length; index++) {
-                        if (photoPosts[index].hashTag.findIndex((element) => element === filterConfig.hashTag) >= 0) {
-                            postFilterHashTag.push(photoPosts[index]);
+                    let postFilterHashTag = [];
+                    photoPosts.forEach(function (item) {
+                        if (item.hashTag.findIndex((element) => element === filterConfig.hashTag) >= 0) {
+                            postFilterHashTag.push(item);
                         }
-                    }
+                    });
                     photoPosts = postFilterHashTag;
                 }
                 if (filterConfig.createdAt !== '') {
@@ -192,23 +192,21 @@ var Functional = (function () {
                 return photoPosts.slice(skip, skip + top);
             }
         }
-        // function getPhotoPost(id) {
-        //     return photoPosts.find((element) => element.id === id);
-        // }
+
+        function getPhotoPost(id) {
+            return photoPosts.find((element) => element.id === id);
+        }
 
         function validatePhotoPost(photoPost) {
             if (photoPost.id === "" || photoPost.author === "" || photoPost.description === "" || photoPost.photoLink === ""
-                || photoPost.hashTag.length === 0) {
-                return false;
-            }
-            if (!photoPost.createdAt instanceof Date) {
+                || photoPost.hashTag.length === 0 || !photoPost.createdAt instanceof Date) {
                 return false;
             }
             return true;
         }
 
         function removePhotoPost(photoPosts, id) {
-            var index = photoPosts.findIndex((element) => element.id === id);
+            let index = photoPosts.findIndex((element) => element.id === id);
             if (index >= 0) {
                 photoPosts.splice(index, 1);
                 return photoPosts;
@@ -229,45 +227,48 @@ var Functional = (function () {
             if (id === undefined) {
                 return false;
             }
-            var index = photoPosts.findIndex((element) => element.id === id);
+            let index = photoPosts.findIndex((element) => element.id === id);
             if (index >= 0) {
-                var post = photoPosts[index];
                 if (objectPhotoPost.hasOwnProperty('photoLink')) {
-                    post.photoLink = objectPhotoPost.photoLink;
+                    photoPosts[index].photoLink = objectPhotoPost.photoLink;
                 }
                 if (objectPhotoPost.hasOwnProperty('description') && objectPhotoPost.description.length < 200) {
-                    post.description = objectPhotoPost.description;
+                    photoPosts[index].description = objectPhotoPost.description;
                 }
                 if (objectPhotoPost.hasOwnProperty('hashTag')) {
-                    post.hashTag = objectPhotoPost.hashTag;
+                    photoPosts[index].hashTag = objectPhotoPost.hashTag;
                 }
-                photoPosts[index] = post;
             }
             return photoPosts;
         }
 
+        function putLike(photoPosts, id, user) {
+            let index = photoPosts.findIndex((element) => element.id === id);
+            if (index >= 0) {
+                photoPosts[index].like.push(user);
+                return true;
+            }
+        }
+
+        function isLikedByUser(likes, user) {
+            return likes.findIndex((likeOwn) => likeOwn === user) >= 0;
+        }
+
+        function getHashTag(elementArr, options) {
+            return options.findIndex((hashTag) => hashTag === elementArr) >= 0;
+        }
+
         return {
-            photoPosts:photoPosts,
+            photoPosts: photoPosts,
             getPhotoPosts: getPhotoPosts,
             removePhotoPost: removePhotoPost,
             editPhotoPost: editPhotoPost,
             addPhotoPost: addPhotoPost,
-           // getPhotoPost: getPhotoPost
+            getPhotoPost: getPhotoPost,
+            putLike: putLike,
+            isLikedByUser: isLikedByUser,
+            getHashTag: getHashTag
         }
     }
-)
-();
-// console.log(Functional.getPhotoPosts(0, 10));
-// console.log(Functional.getPhotoPosts(0, 10, {author: "Adamskaya Yuliya"}));
-// console.log(Functional.getPhotoPost('9'));
-// console.log(Functional.editPhotoPost('1', {hashTag: ['#hashtag_1', '#hashtag_8']}));
-// console.log(Functional.addPhotoPost({
-//     id: 21,
-//     description: 'Text',
-//     createdAt: '07.04.2018',
-//     author: 'Adamskaya Yuliya',
-//     photoLink: 'images/21.jpg',
-//     hashTag: ['#flowers'],
-//     like: ['']
-// }));
-// console.log(Functional.removePhotoPost('4'));
+)();
+
