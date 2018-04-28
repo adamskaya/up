@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marshmallows</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="logo">Marshmallows</div>
+    <div class="menu">
+        <a href="index.html" id="home">Home</a>
+        <form name="search" method="get" id="search-form">
+            <!--1search-->
+            <input name="date" placeholder=" search by date...">
+            <!--2search-->
+            <input name="username" placeholder=" search by name...">
+            <!--3search-->
+            <select name="select" id="hashTag">
+                <option value="" hidden disabled selected>search hashTag...</option>
+                <option>#nature</option>
+                <option>#food</option>
+                <option>#coffe</option>
+                <option>#flowers</option>
+            </select>
+            <button type="submit" id="button-search"><img src="images/search.png"/></button>
+        </form>
+        <a href="" id="sign-out-sign-in">Sign out</a>
+    </div>
+</header>
+<main>
+    <div class="site-content">
+    </div>
+    <div class="avatar">
+        <img class="avatar_image" src="images/user.png"/>
+        <div class="name">
+            <p id="user">user</p>
+            <button class="button-add"><i>Add post</i></button>
+            <div class="line"></div>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="download">
+            <b>...</b>
+        </button>
+    </div>
+</main>
+<footer>
+    <div class="logo-footer">Marshmallows</div>
+    <div class="footer-icon">
+        <button type="button" class="vk"><img src="images/vk.png" alt="vk"/></button>
+        <button type="button" class="email"><img src="images/email.png" alt="email"/></button>
+        <button type="button" class="insta"><img src="images/insta.png" alt="instagram"/></button>
+    </div>
+    <p class="data">Adamskaya Yuliya 2 course 6 group<br>03.03.2018</p>
+</footer>
+<script src="script.js"></script>
+<script src="DOM.js"></script>
+<script src="eventsHome.js"></script>
+</body>
+</html>
+
