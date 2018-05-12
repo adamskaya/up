@@ -2,13 +2,14 @@
   {
     "author": "Adamskaya Yuliya",
     "createdAt": "2018-04-24T21:00:00.000Z",
+    "deleted": false,
     "description": "TextNew",
-    "hashTag": [
+    "hashTags": [
       "#nature",
       "#flowers"
     ],
     "id": "1",
-    "like": [
+    "likes": [
       "author1",
       "author2"
     ],
@@ -17,13 +18,14 @@
   {
     "author": "Murashko Yuliya",
     "createdAt": "2018-04-25T21:00:00.000Z",
+    "deleted": false,
     "description": "Text",
-    "hashTag": [
+    "hashTags": [
       "#nature",
       "#flowers"
     ],
     "id": "2",
-    "like": [
+    "likes": [
       "author1",
       "author3"
     ],
@@ -32,12 +34,13 @@
   {
     "author": "Ambrosyonok Marina",
     "createdAt": "2018-02-01T21:00:00.000Z",
+    "deleted": false,
     "description": "Text",
-    "hashTag": [
+    "hashTags": [
       "#coffe"
     ],
     "id": "3",
-    "like": [
+    "likes": [
       "author2"
     ],
     "photoLink": "images/18.jpg"
@@ -45,12 +48,13 @@
   {
     "author": "Murashko Yuliya",
     "createdAt": "2018-02-28T21:00:00.000Z",
+    "deleted": false,
     "description": "Text",
-    "hashTag": [
+    "hashTags": [
       "#food"
     ],
     "id": "8",
-    "like": [
+    "likes": [
       "author1",
       "author2",
       "author3"
@@ -60,15 +64,59 @@
   {
     "author": "Adamskaya Yuliya",
     "createdAt": "2018-03-01T21:00:00.000Z",
+    "deleted": false,
     "description": "Text",
-    "hashTag": [
+    "hashTags": [
       "#food"
     ],
     "id": "5",
-    "like": [
+    "likes": [
       "author1",
       "author2"
     ],
     "photoLink": "images/16_1.jpg"
+  },
+  {
+    "author": "Adamskaya Yuliya",
+    "createdAt": "2018-02-26T21:00:00.000Z",
+    "deleted": false,
+    "description": "Text",
+    "hashTags": [
+      "#coffe"
+    ],
+    "id": "4",
+    "likes": [
+      "author3"
+    ],
+    "photoLink": "images/17.jpg"
+  },
+  {
+    "author": "Ambrosyonok Marina",
+    "createdAt": "2018-02-09T21:00:00.000Z",
+    "deleted": false,
+    "description": "Text",
+    "hashTags": [
+      "#flowers"
+    ],
+    "id": "6",
+    "likes": [
+      "author1",
+      "author2"
+    ],
+    "photoLink": "images/15.jpg"
+  },
+  {
+    "author": "Adamskaya Yuliya",
+    "createdAt": "2018-04-02T21:00:00.000Z",
+    "deleted": false,
+    "description": "Text",
+    "hashTags": [
+      "#food"
+    ],
+    "id": "7",
+    "likes": [
+      "author2"
+    ],
+    "photoLink": "images/14.jpg"
   }
 ]

@@ -1,9 +1,13 @@
 const fs = require('fs');
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer();
 
-let app = express();
 let posts = JSON.parse(fs.readFileSync('./server/data/posts.json'));
+let users = JSON.parse(fs.readFileSync('./server/data/users.json'));
+
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded());
@@ -14,19 +18,15 @@ function getPhotoPost(id) {
 }
 
 function validatePhotoPost(photoPost) {
-    if (photoPost.id || photoPost.author || photoPost.photoLink || photoPost.hashTag.length === 0 || !photoPost.createdAt instanceof Date) {
-        return false;
-    }
-    return true;
+    return !(photoPost && typeof photoPost.description === 'string' && typeof photoPost.hashTags === 'string' && photoPost.photoLink !== '');
 }
 
 function addPhotoPost(objectPhotoPost) {
-     objectPhotoPost.createdAt = new Date(objectPhotoPost.createdAt);
-    if (!validatePhotoPost(objectPhotoPost)) {
+    objectPhotoPost.createdAt = new Date();
+    if (validatePhotoPost(objectPhotoPost)) {
         posts.push(objectPhotoPost);
-        fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
-    }
-    return false;
+   }
+    fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
 }
 
 function compareDate(a, b) {
@@ -44,10 +44,10 @@ function getPhotoPosts(skip, top, filterConfig) {
         if (filterConfig.author) {
             posts = posts.filter((element) => element.author === filterConfig.author);
         }
-        if (filterConfig.hashTag) {
+        if (filterConfig.hashTags) {
             let postFilterHashTag = [];
             for (let index = 0; index < posts.length; index++) {
-                if (posts[index].hashTag.findIndex((element) => element === filterConfig.hashTag) >= 0) {
+                if (posts[index].hashTags.findIndex((element) => element === filterConfig.hashTags) >= 0) {
                     postFilterHashTag.push(posts[index]);
                 }
             }
@@ -61,25 +61,12 @@ function getPhotoPosts(skip, top, filterConfig) {
 }
 
 function editPhotoPost(id, objectPhotoPost) {
-    if (!objectPhotoPost) {
-        return false;
+    if (!objectPhotoPost) return null;
+    const editPhotoPost = getPhotoPost(objectPhotoPost.id);
+    if (editPhotoPost) {
+        Object.assign(editPhotoPost, objectPhotoPost);
     }
-    if (!id) {
-        return false;
-    }
-    let index = posts.findIndex((element) => element.id === id);
-    if (index >= 0) {
-        if (objectPhotoPost.photoLink) {
-            posts[index].photoLink = objectPhotoPost.photoLink;
-        }
-        if (objectPhotoPost.description && objectPhotoPost.description.length < 200) {
-            posts[index].description = objectPhotoPost.description;
-        }
-        if (objectPhotoPost.hashTag) {
-            posts[index].hashTag = objectPhotoPost.hashTag;
-        }
-        fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
-    }
+    fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
 }
 
 function removePost(id) {
@@ -89,6 +76,26 @@ function removePost(id) {
         fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
     }
 }
+
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cache-Control, Expires, Authorization, Authentication');
+    next()
+});
+
+app.get('/allUsers', (req, res) => {
+    if (posts) {
+        res.send(users);
+    } else {
+        res.status(404).end();
+    }
+});
+
+app.post('/uploadImage', upload.single('file'), (req, res) => {
+    fs.writeFile(req.file.originalname,
+        req.file.buffer);
+});
 
 app.get('/allPosts', (req, res) => {
     if (posts) {
