@@ -12,7 +12,7 @@
         }
 
         showMessageNoPosts() {
-            let messageError = document.createElement("div");
+            let messageError = document.createElement('div');
             messageError.className = 'error-text';
             messageError.textContent = 'Фотопостов не найдено!';
             this.posts.classList.add('error');
@@ -152,7 +152,7 @@
                 messageError.innerText = error;
 
             } else {
-                let messageError = document.createElement("div");
+                let messageError = document.createElement('div');
                 messageError.className = 'error-text';
                 messageError.textContent = error;
                 document.getElementById('newEntry').appendChild(messageError);
