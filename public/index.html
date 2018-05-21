@@ -67,14 +67,14 @@
         <form id="form-registration">
             <div class="user-data">
                 <img src="images/userRegistration.png"/>
-                <input name="username" id="username" placeholder=" Username...">
+                <input name="username" id="username" placeholder=" Имя пользователя...">
             </div>
             <div class="user-data">
                 <img src="images/keyRegistration.png"/>
-                <input name="password" id="password" placeholder=" Password...">
+                <input name="password" id="password" placeholder=" Пароль...">
             </div>
             <button type="submit" id="button-registration" value="Sign in">
-                <a href="index.html"> Sign in</a>
+                <a href="index.html">Войти</a>
             </button>
         </form>
     </template>
@@ -89,25 +89,23 @@
             <img class="new-photo" src="images/downloadImage.png">
             <form id="newEntry" name="entry">
                 <div class="download-photo">
-                    <p>download photo</p>
-                    <button class="button-add-photo" type="submit">
-                        <img src="images/download.png"/>
-                    </button>
+                    <p>Загрузить фото:</p>
+                    <input type="file" class="fileInput" accept="image/*">
                 </div>
-                <p>description:</p>
+                <p>Описание:</p>
                 <input name="description">
-                <p>hashTags:</p>
+                <p>HashTag:</p>
                 <input name="hashTags">
             </form>
             <button id="button-submit-post" type="submit" value="Send">
-                <a href="index.html">Submit</a>
+                <a href="index.html">Отправить</a>
             </button>
         </div>
     </template>
 
     <article class="user">
         <div class="big-avatar"></div>
-        <p id="name">Adamskaya Yuliya</p>
+        <p id="name"></p>
         <div class="add-post-button">
             <button id="button-add"><a>Add post</a></button>
         </div>
@@ -127,11 +125,11 @@
         <button type="button" class="email"><img src="images/email.png" alt="email"/></button>
         <button type="button" class="insta"><img src="images/insta.png" alt="instagram"/></button>
     </div>
-    <p class="data-page">Adamskaya Yuliya 2 course 6 group<br>05.05.2018</p>
+    <p class="data-page">Адамская Юлия 2 курс 6 группа<br>20.05.2018</p>
 </footer>
-<script src="script-module.js"></script>
+<script src="model.js"></script>
 <script src="DOM.js"></script>
-<script src="eventsHome.js"></script>
+<script src="controller.js"></script>
 </body>
 </html>
 

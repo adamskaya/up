@@ -1,6 +1,6 @@
 (function () {
     class PostsView {
-        static get msgTemplate() {
+        static get template() {
             if (!PostsView._template) {
                 PostsView._template = document.getElementById('post-template');
             }
@@ -14,7 +14,7 @@
         showMessageNoPosts() {
             let messageError = document.createElement("div");
             messageError.className = 'error-text';
-            messageError.textContent = 'PhotoPosts not found!';
+            messageError.textContent = 'Фотопостов не найдено!';
             this.posts.classList.add('error');
             this.posts.appendChild(messageError);
         }
@@ -46,7 +46,7 @@
         }
 
         createEmptyPost() {
-            const fragment = document.importNode(PostsView.msgTemplate.content, true);
+            const fragment = document.importNode(PostsView.template.content, true);
             return fragment.firstElementChild;
         }
 
@@ -81,9 +81,8 @@
         }
     }
 
-    /**/
     class RegistrationFormView {
-        static get msgTemplate() {
+        static get template() {
             if (!RegistrationFormView._template) {
                 RegistrationFormView._template = document.getElementById('registration-form-template');
             }
@@ -119,17 +118,17 @@
         }
 
         createEmpty() {
-            const fragment = document.importNode(RegistrationFormView.msgTemplate.content, true);
+            const fragment = document.importNode(RegistrationFormView.template.content, true);
             return fragment.firstElementChild;
         }
     }
 
-    class newPostView {
-        static get msgTemplate() {
-            if (!newPostView._template) {
-                newPostView._template = document.getElementById('add-post-template');
+    class NewPostView {
+        static get template() {
+            if (!NewPostView._template) {
+                NewPostView._template = document.getElementById('add-post-template');
             }
-            return newPostView._template;
+            return NewPostView._template;
         }
 
         constructor(newPostView) {
@@ -147,8 +146,22 @@
             this.newPostView.innerHTML = '';
         }
 
+        showMessageNoData(error) {
+            let messageError = document.querySelector('.error-text');
+            if (messageError) {
+                messageError.innerText = error;
+
+            } else {
+                let messageError = document.createElement("div");
+                messageError.className = 'error-text';
+                messageError.textContent = error;
+                document.getElementById('newEntry').appendChild(messageError);
+            }
+
+        }
+
         createEmpty() {
-            const fragment = document.importNode(newPostView.msgTemplate.content, true);
+            const fragment = document.importNode(NewPostView.template.content, true);
             return fragment.firstElementChild;
         }
     }
@@ -158,18 +171,20 @@
     }
 
     function getUser() {
-        const user = document.querySelector('.user');
-        if (user) {
-            return document.getElementById('name').textContent;
+        const user =  document.getElementById('name').textContent;
+        if (user.length) {
+            return user;
         } else return null;
     }
 
     function isLikedByUser(likes) {
         const user = getUser();
-        return likes.find((likeOwn) => likeOwn === user);
+        if(user && likes) {
+            return likes.find((likeOwn) => likeOwn === user);
+        } else return null;
     }
 
     window.PostView = PostsView;
     window.RegistrationFormView = RegistrationFormView;
-    window.newPostView = newPostView;
+    window.NewPostView = NewPostView;
 })();

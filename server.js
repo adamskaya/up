@@ -1,103 +1,48 @@
-const fs = require('fs');
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
 const multer = require('multer');
-const upload = multer();
+const express = require('express');
+const fs = require('fs');
+const actions = require('./server/module.js');
+const bodyParser = require('body-parser');
 
-let posts = JSON.parse(fs.readFileSync('./server/data/posts.json'));
-let users = JSON.parse(fs.readFileSync('./server/data/users.json'));
-
-
+const app = express();
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-function getPhotoPost(id) {
-    return posts.find((element) => element.id === id);
-}
-
-function validatePhotoPost(photoPost) {
-    return !(photoPost && typeof photoPost.description === 'string' && typeof photoPost.hashTags === 'string' && photoPost.photoLink !== '');
-}
-
-function addPhotoPost(objectPhotoPost) {
-    objectPhotoPost.createdAt = new Date();
-    if (validatePhotoPost(objectPhotoPost)) {
-        posts.push(objectPhotoPost);
-   }
-    fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
-}
-
-function compareDate(a, b) {
-    return new Date(b.createdAt) - new Date(a.createdAt);
-}
-
-function getPhotoPosts(skip, top, filterConfig) {
-    skip = skip || 0;
-    top = top || 10;
-    posts.sort(compareDate);
-    if (filterConfig.length === 0) {
-        return posts.slice(skip, skip + top);
-    }
-    else {
-        if (filterConfig.author) {
-            posts = posts.filter((element) => element.author === filterConfig.author);
+const upload = {
+    storage: multer.diskStorage({
+        destination: function (req, file, sb) {
+            sb(null, './public/images');
+        },
+        filename: function (req, file, sb) {
+            sb(null, file.originalname);
         }
-        if (filterConfig.hashTags) {
-            let postFilterHashTag = [];
-            for (let index = 0; index < posts.length; index++) {
-                if (posts[index].hashTags.findIndex((element) => element === filterConfig.hashTags) >= 0) {
-                    postFilterHashTag.push(posts[index]);
-                }
-            }
-            posts = postFilterHashTag;
-        }
-        if (filterConfig.createdAt) {
-            posts = posts.filter((element) => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
-        }
-        return posts.slice(skip, skip + top);
-    }
-}
-
-function editPhotoPost(id, objectPhotoPost) {
-    if (!objectPhotoPost) return null;
-    const editPhotoPost = getPhotoPost(objectPhotoPost.id);
-    if (editPhotoPost) {
-        Object.assign(editPhotoPost, objectPhotoPost);
-    }
-    fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
-}
-
-function removePost(id) {
-    let index = posts.findIndex((element) => element.id === id);
-    if (index >= 0) {
-        posts.splice(index, 1);
-        fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
-    }
-}
+    })
+};
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cache-Control, Expires, Authorization, Authentication');
     next()
 });
 
 app.get('/allUsers', (req, res) => {
-    if (posts) {
+    const users = actions.getUsers();
+    if (users) {
         res.send(users);
     } else {
         res.status(404).end();
     }
 });
 
-app.post('/uploadImage', upload.single('file'), (req, res) => {
-    fs.writeFile(req.file.originalname,
-        req.file.buffer);
+app.post('/uploadImage', multer(upload).single('file'), function (req, res) {
+    let filename = req.file.filename;
+    res.send(filename);
 });
 
 app.get('/allPosts', (req, res) => {
+    const posts = actions.getPhotoPosts();
     if (posts) {
         res.send(posts);
     } else {
@@ -106,7 +51,7 @@ app.get('/allPosts', (req, res) => {
 });
 
 app.get('/getPost', (req, res) => {
-    let post = getPhotoPost(req.query.id);
+    let post = actions.getPhotoPost(req.query.id);
     if (post) {
         res.send(post);
     } else {
@@ -115,17 +60,18 @@ app.get('/getPost', (req, res) => {
 });
 
 app.post('/addPost', (req, res) => {
+    const posts = actions.getPhotoPosts();
     if (posts) {
-        addPhotoPost(req.body);
-        res.send(posts);
+        actions.addPhotoPost(req.body);
+        res.send(actions.getPhotoPosts());
     } else {
         res.status(404).end();
     }
 });
 app.post('/getPosts', (req, res) => {
-
+    const posts = actions.getPhotoPosts();
     if (posts) {
-        res.send(getPhotoPosts(req.query.skip, req.query.top, req.body));
+        res.send(actions.getPhotoPosts(req.query.skip, req.query.top, req.body));
     } else {
         res.status(404).end();
     }
@@ -134,17 +80,18 @@ app.post('/getPosts', (req, res) => {
 app.put('/editPost', (req, res) => {
     let post = req.body;
     if (post) {
-        editPhotoPost(req.query.id, post);
-        res.send(posts);
+        actions.editPhotoPost(req.query.id, post);
+        res.send(actions.getPhotoPosts());
     } else {
         res.status(404).end();
     }
 });
 
 app.delete('/removePost', (req, res) => {
+    const posts = actions.getPhotoPosts();
     if (posts) {
-        removePost(req.query.id);
-        res.send(posts);
+        actions.removePost(req.query.id);
+        res.send(actions.getPhotoPosts());
     } else {
         res.status(404).end();
     }

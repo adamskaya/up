@@ -299,6 +299,7 @@ main > section:not(.active) {
 .error-text {
     font-size: 1.2vw;
     color: red;
+    text-align: center;
 }
 
 /*addPost*/
@@ -308,7 +309,7 @@ main > section:not(.active) {
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     line-height: 1;
     float: left;
     width: 63%;
@@ -318,9 +319,11 @@ main > section:not(.active) {
 .download-photo {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
+.download-photo.hide {
+    display: none;
+}
 .button-add-photo {
     height: 2.2vw;
     background: rgba(251, 251, 251, 0);
@@ -332,12 +335,20 @@ main > section:not(.active) {
 }
 
 .new-photo {
-    width: 20vw;
+    width: 25vw;
+    height: 25vw;
+}
+
+.new-photo.image {
+    display: inline-block;
+    width: 95%;
+    height: 30vw;
+    margin: 1.1vw 0 0.3vw;
 }
 
 #newEntry {
     flex-direction: column;
-    width: 90%;
+    width: 95%;
     display: flex;
 }
 
@@ -351,7 +362,7 @@ main > section:not(.active) {
 
 #button-submit-post {
     height: 2vw;
-    width: 6vw;
+    width: 7vw;
     font-size: 1.2vw;
     font-weight: bold;
     background-color: rgba(237, 236, 253, 0.33);

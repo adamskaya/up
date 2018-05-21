@@ -5,6 +5,7 @@
             }
 
             addPhotoPost(photoPost) {
+                photoPost.deleted = false;
                 photoPost.id = String(generateId());
                 photoPost.likes = [];
                 return new Promise((resolve, reject) => {
@@ -46,6 +47,7 @@
                         throw error;
                     });
             }
+
 
             removePhotoPost(id) {
                 return new Promise((resolve) => {
@@ -116,8 +118,7 @@
         }
 
         class Users {
-            constructor(username) {
-                this.username = username;
+            constructor() {
                 this.users = [];
             }
 
@@ -156,6 +157,5 @@
         window.PhotoPostsCollection = PhotoPostsCollection;
         window.Users = Users;
     }
-
 )();
 
