@@ -9,10 +9,10 @@ function compareDate(a, b) {
 const actions = {
 
     getPhotoPost(id) {
-        return posts.find((element) => element.id === id);
+        return posts.find(element => element.id === id);
     },
 
-    getUsers(){
+    getUsers() {
         return users;
     },
 
@@ -30,7 +30,7 @@ const actions = {
 
     getPhotoPosts(skip, top, filterConfig) {
         posts.sort(compareDate);
-        if(skip === undefined && top === undefined){
+        if (skip === undefined && top === undefined) {
             return posts;
         }
         skip = skip || 0;
@@ -38,24 +38,22 @@ const actions = {
         if (filterConfig.length === 0) {
             return posts.slice(skip, skip + top);
         }
-        else {
-            if (filterConfig.author) {
-                posts = posts.filter((element) => element.author === filterConfig.author);
-            }
-            if (filterConfig.hashTags) {
-                let postFilterHashTag = [];
-                for (let index = 0; index < posts.length; index++) {
-                    if (posts[index].hashTags.findIndex((element) => element === filterConfig.hashTags) >= 0) {
-                        postFilterHashTag.push(posts[index]);
-                    }
-                }
-                posts = postFilterHashTag;
-            }
-            if (filterConfig.createdAt) {
-                posts = posts.filter((element) => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
-            }
-            return posts.slice(skip, skip + top);
+        if (filterConfig.author) {
+            posts = posts.filter(element => element.author === filterConfig.author);
         }
+        if (filterConfig.hashTags) {
+            const postFilterHashTag = [];
+            for (let index = 0; index < posts.length; index++) {
+                if (posts[index].hashTags.findIndex(element => element === filterConfig.hashTags) >= 0) {
+                    postFilterHashTag.push(posts[index]);
+                }
+            }
+            posts = postFilterHashTag;
+        }
+        if (filterConfig.createdAt) {
+            posts = posts.filter(element => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
+        }
+        return posts.slice(skip, skip + top);
     },
 
     editPhotoPost(id, objectPhotoPost) {
@@ -65,10 +63,11 @@ const actions = {
             Object.assign(editPhotoPost, objectPhotoPost);
         }
         fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
+        return true;
     },
 
     removePost(id) {
-        let index = posts.findIndex((element) => element.id === id);
+        const index = posts.findIndex(element => element.id === id);
         if (index >= 0) {
             posts.splice(index, 1);
             fs.writeFile(('./server/data/posts.json'), JSON.stringify(posts));
@@ -76,5 +75,4 @@ const actions = {
     }
 };
 module.exports = actions;
-
 

@@ -5,26 +5,21 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 
 const upload = {
     storage: multer.diskStorage({
-        destination: function (req, file, sb) {
+        destination: (req, file, sb) => {
             sb(null, './public/images');
         },
-        filename: function (req, file, sb) {
+        filename: (req, file, sb) => {
             sb(null, file.originalname);
         }
     })
 };
-
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Cache-Control, Expires, Authorization, Authentication');
-    next();
-});
 
 app.get('/allUsers', (req, res) => {
     const users = actions.getUsers();
@@ -35,9 +30,8 @@ app.get('/allUsers', (req, res) => {
     }
 });
 
-app.post('/uploadImage', multer(upload).single('file'), function (req, res) {
-    let filename = req.file.filename;
-    res.send(filename);
+app.post('/uploadImage', multer(upload).single('file'), (req, res) => {
+    res.send(req.file.filename);
 });
 
 app.get('/allPosts', (req, res) => {
@@ -50,7 +44,7 @@ app.get('/allPosts', (req, res) => {
 });
 
 app.get('/getPost', (req, res) => {
-    let post = actions.getPhotoPost(req.query.id);
+    const post = actions.getPhotoPost(req.query.id);
     if (post) {
         res.send(post);
     } else {
@@ -77,7 +71,7 @@ app.post('/getPosts', (req, res) => {
 });
 
 app.put('/editPost', (req, res) => {
-    let post = req.body;
+    const post = req.body;
     if (post) {
         actions.editPhotoPost(req.query.id, post);
         res.send(actions.getPhotoPosts());

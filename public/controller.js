@@ -1,15 +1,13 @@
 (function () {
-
     let numberPhotoPostsOnPage = 0;
     const getNumberPhotoPostsOnPage = 10;
-    const username = JSON.parse(localStorage.getItem('user'));
 
     const postsList = document.getElementById('site-content');
     const signInView = document.getElementById('sign-in');
     const addPostView = document.getElementById('add');
     const buttonLoadPosts = document.getElementById('button-load');
     const buttonSignIn = document.getElementById('sign-out-sign-in');
-    const postForm = document.getElementById('button-search');
+    const postFormForFilter = document.getElementById('button-search');
     const buttonAddPost = document.getElementById('button-add');
 
     const model = new PhotoPostsCollection();
@@ -18,32 +16,12 @@
     const registrationView = new RegistrationFormView(signInView);
     const newElemListView = new NewPostView(addPostView);
 
-    function bindEvents() {
-        buttonLoadPosts.addEventListener('click', loadMorePhotoPosts);
-        buttonSignIn.addEventListener('click', signIn);
-        postsList.addEventListener('click', onItemClick);
-        postForm.addEventListener('click', onPostFormSubmit);
-        buttonAddPost.addEventListener('click', onPostAdd)
-    }
-
-    // ================= INIT ======================
-    load();
-
-    // =============================================
-    async function load() {
-        await model.loadPhotoPosts();
-        await users.loadUsers();
-        showView('list');
-        onUpdate();
-        bindEvents();
-    }
-
     function getHashTags(listPhotoPosts) {
-        let hashTags = [];
-        listPhotoPosts.forEach(function (item) {
+        const hashTags = [];
+        listPhotoPosts.forEach((item) => {
             if (item.hashTags) {
                 for (let index = 0; index < item.hashTags.length; index++) {
-                    if (hashTags.findIndex((element) => element === item.hashTags[index]) < 0) {
+                    if (hashTags.findIndex(element => element === item.hashTags[index]) < 0) {
                         hashTags.push(item.hashTags[index]);
                     }
                 }
@@ -53,12 +31,12 @@
     }
 
     function addHashTags() {
-        let hashTags = getHashTags(model.list);
+        const hashTags = getHashTags(model.list);
         localStorage.setItem('hashTags', JSON.stringify(hashTags));
         const listHashTags = document.getElementById('hashTags');
-        hashTags.forEach(function (hashTags) {
-            let options = document.createElement('option');
-            options.innerHTML = hashTags;
+        hashTags.forEach((hashTag) => {
+            const options = document.createElement('option');
+            options.innerHTML = hashTag;
             listHashTags.appendChild(options);
         });
     }
@@ -76,16 +54,6 @@
             document.getElementById('name').textContent = username;
         }
     }
-
-    function onUpdate() {
-        addUser();
-        const listPhotoPosts = model.getPhotoPosts(numberPhotoPostsOnPage, getNumberPhotoPostsOnPage);
-        listView.clearPage();
-        listView.addAllPost(listPhotoPosts);
-        addHashTags();
-        checkNumberPhotoPosts(listPhotoPosts);
-    }
-
     function checkNumberPhotoPosts(listPhotoPosts) {
         numberPhotoPostsOnPage = numberPhotoPostsOnPage + listPhotoPosts.length;
         if (listPhotoPosts.length === getNumberPhotoPostsOnPage && model.list.length !== numberPhotoPostsOnPage) {
@@ -94,7 +62,14 @@
             document.querySelector('.download').classList.add('hide');
         }
     }
-
+    function onUpdate() {
+        addUser();
+        const listPhotoPosts = model.getPhotoPosts(numberPhotoPostsOnPage, getNumberPhotoPostsOnPage);
+        listView.clearPage();
+        listView.addAllPost(listPhotoPosts);
+        addHashTags();
+        checkNumberPhotoPosts(listPhotoPosts);
+    }
     function loadMorePhotoPosts() {
         const listPhotoPosts = model.getPhotoPosts(numberPhotoPostsOnPage, getNumberPhotoPostsOnPage);
         checkNumberPhotoPosts(listPhotoPosts);
@@ -108,7 +83,7 @@
         return {
             username: formData.get('username'),
             password: formData.get('password')
-        }
+        };
     }
 
     function handlerRegistrationData() {
@@ -116,16 +91,25 @@
         if (formData.username === '') {
             registrationView.showMessageErrorInData('Данные некорректные!');
             event.preventDefault();
+        }
+        if (formData.password === users.findUser(formData.username).password) {
+            localStorage.setItem('user', JSON.stringify(formData.username));
         } else {
-            if (formData.password === users.findUser(formData.username).password) {
-                localStorage.setItem('user', JSON.stringify(formData.username));
-            } else {
-                registrationView.showMessageErrorInData('Неправильный пароль!');
-                event.preventDefault();
-            }
+            registrationView.showMessageErrorInData('Неправильный пароль!');
+            event.preventDefault();
         }
     }
 
+    function showView(viewName) {
+        const views = document.querySelectorAll('section[data-role]');
+        [].slice.call(views).forEach((view) => {
+            if (view.dataset.role === viewName) {
+                view.classList.add('active');
+            } else {
+                view.classList.remove('active');
+            }
+        });
+    }
     function signIn() {
         if (buttonSignIn.textContent === 'Sign in') {
             showView('sign-in');
@@ -140,34 +124,13 @@
             event.preventDefault();
         }
     }
-
-    function onItemClick(event) {
-        const target = event.target.closest('[data-action]');
-        if (target) {
-            const post = event.target.closest('.photo-post');
-            switch (target.dataset.action) {
-                case 'edit':
-                    onPostEdit(post.dataset.id);
-                    break;
-                case 'delete':
-                    onPostDelete(post.dataset.id);
-                    break;
-                case 'like':
-                    onPostLike(post.dataset.id);
-            }
-            event.preventDefault();
-        }
-    }
-
     function parseHashTags(stringOfHashTags) {
         let hashTag = '';
-        let listHashTags = [];
-        let countHashTags = 0;
+        const listHashTags = [];
         let isHashTag = false;
         for (let index = 0; index < stringOfHashTags.length; index++) {
             if (stringOfHashTags[index] === '#') {
                 isHashTag = true;
-                countHashTags++;
             }
             if (isHashTag) {
                 if (!(stringOfHashTags[index] === ',') && !(stringOfHashTags[index] === ' ')) {
@@ -184,7 +147,8 @@
     }
 
     function getDataNewPost(post) {
-        let newPost = {};
+        const username = JSON.parse(localStorage.getItem('user'));
+        const newPost = {};
         const entry = document.getElementById('newEntry');
         const formData = new FormData(entry);
         newPost.id = post ? post.id : ' ';
@@ -199,27 +163,32 @@
     }
 
     function uploadImage(file) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append('file', file);
 
-        let image = document.createElement('img');
+        const image = document.createElement('img');
         image.src = window.URL.createObjectURL(formData.get('file'));
-        let newPost = document.querySelector('.new-photo');
+        const newPost = document.querySelector('.new-photo');
         newPost.src = image.src;
         newPost.classList.add('image');
 
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open('POST', '/uploadImage');
         xhr.send(formData);
     }
 
+    function setFormPostData(post) {
+        const postForm = document.getElementById('newEntry');
+        postForm.querySelector('[name="description"]').value = post ? post.description : '';
+        postForm.querySelector('[name="hashTags"]').value = post ? post.hashTags : '';
+    }
     async function onPostEdit(id) {
         const post = model.getPhotoPost(id);
         showView('add-post');
         newElemListView.clearPage();
         newElemListView.addFormForNewPost();
         setFormPostData(post);
-        let postEdit = document.querySelector('.new-photo');
+        const postEdit = document.querySelector('.new-photo');
         postEdit.src = post.photoLink;
         postEdit.classList.add('image');
         document.querySelector('.download-photo').classList.add('hide');
@@ -247,16 +216,13 @@
         });
     }
 
-    async function onPostDelete(id) {
-        listView.removePost(id);
-        await model.removePhotoPost(id);
-    }
-
     function isLikedByUser(likes) {
-        return likes.find((likeOwn) => likeOwn === username);
+        const username = JSON.parse(localStorage.getItem('user'));
+        return likes.find(likeOwn => likeOwn === username);
     }
 
     async function onPostLike(id) {
+        const username = JSON.parse(localStorage.getItem('user'));
         if (username) {
             const post = model.getPhotoPost(id);
             const postView = listView.find(id);
@@ -264,27 +230,48 @@
                 post.likes.push(username);
                 await model.editPhotoPost(post);
                 postView.querySelector('.like').classList.add('active');
-            }
-            else {
-                post.likes.splice(post.likes.findIndex((element) => element === username), 1);
+            } else {
+                post.likes.splice(post.likes.findIndex(element => element === username), 1);
                 await model.editPhotoPost(post);
                 postView.querySelector('.like').classList.remove('active');
             }
             postView.querySelector('.number-of-likes').textContent = 'Likes: ' + post.likes.length;
         }
     }
-
+    async function onPostDelete(id) {
+        listView.removePost(id);
+        await model.removePhotoPost(id);
+    }
+    function onItemClick(event) {
+        const target = event.target.closest('[data-action]');
+        if (target) {
+            const post = event.target.closest('.photo-post');
+            switch (target.dataset.action) {
+                case 'edit':
+                    onPostEdit(post.dataset.id);
+                    break;
+                case 'delete':
+                    onPostDelete(post.dataset.id);
+                    break;
+                case 'like':
+                    onPostLike(post.dataset.id);
+                    break;
+                default: break;
+            }
+            event.preventDefault();
+        }
+    }
     function getFilterData() {
+        const username = JSON.parse(localStorage.getItem('user'));
         const searchForm = document.getElementById('search-form');
         const searchFormData = new FormData(searchForm);
         const date = searchFormData.get('date');
-        const username = searchFormData.get('username');
-        const hashTags = searchFormData.get('listHashTags');
+        const filterHashTags = searchFormData.get('listHashTags');
         return {
             author: username,
             createdAt: date,
-            hashTags: hashTags
-        }
+            hashTags: filterHashTags
+        };
     }
 
     function onPostFormSubmit() {
@@ -303,22 +290,22 @@
         event.preventDefault();
     }
 
-    function setFormPostData(post) {
-        const postForm = document.getElementById('newEntry');
-        postForm.querySelector('[name="description"]').value = post ? post.description : '';
-        postForm.querySelector('[name="hashTags"]').value = post ? post.hashTags : '';
+    function bindEvents() {
+        buttonLoadPosts.addEventListener('click', loadMorePhotoPosts);
+        buttonSignIn.addEventListener('click', signIn);
+        postsList.addEventListener('click', onItemClick);
+        postFormForFilter.addEventListener('click', onPostFormSubmit);
+        buttonAddPost.addEventListener('click', onPostAdd);
     }
 
-    function showView(viewName) {
-        const views = document.querySelectorAll('section[data-role]');
-        [].slice.call(views).forEach((view) => {
-            if (view.dataset.role === viewName) {
-                view.classList.add('active');
-            } else {
-                view.classList.remove('active');
-            }
-        });
+    // =============================================
+    async function load() {
+        await Promise.all([model.loadPhotoPosts(), users.loadUsers()]);
+        showView('list');
+        onUpdate();
+        bindEvents();
     }
+    // ================= INIT ======================
+    load();
 })();
-
 

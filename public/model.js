@@ -1,4 +1,10 @@
 (function () {
+    function compareDate(a, b) {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+    }
+    function generateId() {
+        return Number((Date.now() * 1000) + Math.floor(Math.random() * 1000));
+    }
     class PhotoPostsCollection {
         constructor() {
             this.list = [];
@@ -77,24 +83,22 @@
             if (filterConfig === undefined) {
                 return photoPosts.slice(skip, skip + top);
             }
-            else {
-                if (filterConfig.hashTags) {
-                    let postFilterHashTag = [];
-                    photoPosts.forEach(function (item) {
-                        if (item.hashTags.find((element) => element === filterConfig.hashTags)) {
-                            postFilterHashTag.push(item);
-                        }
-                    });
-                    photoPosts = postFilterHashTag;
-                }
-                if (filterConfig.author) {
-                    photoPosts = photoPosts.filter((element) => element.author === filterConfig.author);
-                }
-                if (filterConfig.createdAt) {
-                    photoPosts = photoPosts.filter((element) => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
-                }
-                return photoPosts;
+            if (filterConfig.hashTags) {
+                const postFilterHashTag = [];
+                photoPosts.forEach((item) => {
+                    if (item.hashTags && item.hashTags.find(element => element === filterConfig.hashTags)) {
+                        postFilterHashTag.push(item);
+                    }
+                });
+                photoPosts = postFilterHashTag;
             }
+            if (filterConfig.author) {
+                photoPosts = photoPosts.filter(element => element.author === filterConfig.author);
+            }
+            if (filterConfig.createdAt) {
+                photoPosts = photoPosts.filter(element => new Date(element.createdAt).toLocaleDateString() === filterConfig.createdAt);
+            }
+            return photoPosts;
         }
 
         loadPhotoPosts() {
@@ -123,7 +127,7 @@
         }
 
         findUser(name) {
-            return this.users.find((element) => element.username === name);
+            return this.users.find(element => element.username === name);
         }
 
         loadUsers() {
@@ -145,15 +149,6 @@
                 });
         }
     }
-
-    function compareDate(a, b) {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-    }
-
-    function generateId() {
-        return Number(Date.now() * 1000 + Math.floor(Math.random() * 1000));
-    }
-
     window.PhotoPostsCollection = PhotoPostsCollection;
     window.Users = Users;
 })();

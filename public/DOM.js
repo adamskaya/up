@@ -1,4 +1,23 @@
 (function () {
+    function formatDate(date) {
+        return new Date(date).toLocaleTimeString() + '  ' + new Date(date).toLocaleDateString();
+    }
+
+    function getUser() {
+        const user = document.getElementById('name').textContent;
+        if (user.length) {
+            return user;
+        }
+        return null;
+    }
+
+    function isLikedByUser(likes) {
+        const user = getUser();
+        if (user && likes) {
+            return likes.find(likeOwn => likeOwn === user);
+        }
+        return null;
+    }
     class PostsView {
         static get template() {
             if (!PostsView._template) {
@@ -12,7 +31,7 @@
         }
 
         showMessageNoPosts() {
-            let messageError = document.createElement('div');
+            const messageError = document.createElement('div');
             messageError.className = 'error-text';
             messageError.textContent = 'Фотопостов не найдено!';
             this.posts.classList.add('error');
@@ -31,7 +50,7 @@
         }
 
         removePost(post) {
-            let postRemove = this.find(post.id || post);
+            const postRemove = this.find(post.id || post);
             if (postRemove) {
                 this.posts.removeChild(postRemove);
             }
@@ -95,15 +114,14 @@
 
         showMessageErrorInData(error) {
             const formRegistration = document.getElementById('form-registration');
-            let messageError = document.querySelector('.error-text');
+            const messageError = document.querySelector('.error-text');
             if (messageError) {
                 messageError.innerText = error;
-
             } else {
-                let messageError = document.createElement('div');
-                messageError.className = 'error-text';
-                messageError.innerText = error;
-                formRegistration.insertBefore(messageError, formRegistration.firstChild);
+                const message = document.createElement('div');
+                message.className = 'error-text';
+                message.innerText = error;
+                formRegistration.insertBefore(message, formRegistration.firstChild);
             }
         }
         addRegistrationForm() {
@@ -147,41 +165,21 @@
         }
 
         showMessageNoData(error) {
-            let messageError = document.querySelector('.error-text');
+            const messageError = document.querySelector('.error-text');
             if (messageError) {
                 messageError.innerText = error;
-
             } else {
-                let messageError = document.createElement('div');
-                messageError.className = 'error-text';
-                messageError.textContent = error;
-                document.getElementById('newEntry').appendChild(messageError);
+                const message = document.createElement('div');
+                message.className = 'error-text';
+                message.textContent = error;
+                message.getElementById('newEntry').appendChild(message);
             }
-
         }
 
         createEmpty() {
             const fragment = document.importNode(NewPostView.template.content, true);
             return fragment.firstElementChild;
         }
-    }
-
-    function formatDate(date) {
-        return new Date(date).toLocaleTimeString() + '  ' + new Date(date).toLocaleDateString();
-    }
-
-    function getUser() {
-        const user =  document.getElementById('name').textContent;
-        if (user.length) {
-            return user;
-        } else return null;
-    }
-
-    function isLikedByUser(likes) {
-        const user = getUser();
-        if(user && likes) {
-            return likes.find((likeOwn) => likeOwn === user);
-        } else return null;
     }
 
     window.PostView = PostsView;
