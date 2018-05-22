@@ -1,0 +1,460 @@
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+@import url(https://fonts.googleapis.com/css?family=Cabin);
+@import url(https://fonts.googleapis.com/css?family=Crimson+Text);
+
+*, *:after, *:before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(22, 0, 27, 0.9);
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+body {
+    margin: 0 auto;
+    width: 77%;
+    font-family: 'Cabin', sans-serif;
+    color: rgba(22, 0, 27, 0.9);
+    background: url("images/body2.jpg");
+}
+
+input, button {
+    border: none;
+    width: 11vw;
+    height: 1.5vw;
+    font-size: 1vw;
+    border-radius: 0.3vw;
+}
+
+button {
+    cursor: pointer;
+}
+
+@media (max-width: 680px) {
+    body {
+        width: 100%;
+    }
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo {
+    background: rgba(235, 233, 242, 0.86);
+    width: 100%;
+    color: rgba(22, 0, 27, 0.9);
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 8.5vw;
+    font-weight: bold;
+    line-height: 1.7;
+}
+
+.menu {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 3vw;
+
+}
+
+.menu a {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.3vmin;
+    font-weight: bold;
+    font-size: 1.5vw;
+}
+
+#sign-out-sign-in {
+    margin-right: 2vw;
+}
+
+#search-form {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#button-search {
+    height: 2vw;
+    width: 2vw;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/*Main*/
+main {
+    background: rgba(235, 233, 242, 0.86);
+    display: inline-block;
+    z-index: 9999;
+    width: 100%;
+}
+
+main > section {
+    height: 100%;
+}
+
+main > section:not(.active) {
+    display: none;
+}
+
+/*Sign in*/
+#sign-in {
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    height: 20vw;
+    margin-left: 15%;
+}
+
+#form-registration {
+    align-items: center;
+    flex-direction: column;
+    height: 70%;
+    display: flex;
+}
+
+.user-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.user-data img {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+#username, #password {
+    background-color: rgba(237, 236, 253, 0.33);
+    width: 17vw;
+    font-size: 1.4vw;
+    margin: 0.5vw 0;
+    height: 2.5vw;
+}
+
+#button-registration {
+    color: #fff;
+    background-color: rgba(237, 236, 253, 0.33);
+    height: 2.2vw;
+    width: 8vw;
+    font-size: 1.2vw;
+    font-weight: bold;
+    margin: 0.5vw;
+}
+
+/*Lenta*/
+#site-content {
+    font-size: 1.2vw;
+    line-height: 1;
+    float: left;
+    width: 63%;
+    margin-left: 12%;
+}
+
+.photo-post {
+    width: 100%;
+    display: inline-block;
+    background: #fff;
+    margin: 0 0 1vw;
+}
+
+.photo-post.hide {
+    display: none;
+}
+
+.header-post {
+    display: flex;
+    width: 100%;
+    height: 4.9vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.information-about-post {
+    display: flex;
+    align-items: center;
+    font-size: 1vw;
+}
+
+.author {
+    font-weight: bold;
+    margin: 0 0.5vw;
+}
+
+.avatar {
+    background: url("images/avatar.png");
+    background-size: 100%;
+    width: 4vw;
+    height: 4vw;
+    margin: 0 0 0 0.4vw;
+}
+
+.remove-edit {
+    height: 3.5vw;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0.4vw 0 0;
+}
+
+.remove-edit.hide {
+    display: none;
+}
+
+.btn {
+    display: flex;
+    height: 1.3vw;
+    width: 1.3vw;
+    background-color: #fff;
+}
+
+.photo {
+    width: 100%;
+    height: 33vw;
+}
+
+.footer-post {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.entry {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 0.4vw;
+}
+
+.like {
+    background: url("images/heart1.png");
+    background-size: 100%;
+    margin: 0 0.4vw 0 0;
+    width: 4.2vw;
+    height: 4.2vw;
+}
+
+.like.active {
+    background: url("images/heart2.png");
+    background-size: 100%;
+    width: 4.2vw;
+    height: 4.2vw;
+}
+
+.description {
+    display: inline-block;
+}
+
+.hashTags{
+    display: inline-block;
+    color: gray;
+}
+
+.users-like {
+    display: inline-block;
+    margin: 1vw 0 0 0;
+}
+
+/*load posts*/
+#button-load {
+    display: inline-block;
+    width: 63%;
+    background-color: #fff;
+    margin-bottom: 1vw;
+    letter-spacing: 0.1vw;
+    margin-left: 12%;
+}
+
+.download.hide {
+    display: none;
+}
+
+/*error*/
+.error {
+    display: flex;
+    background: #fff;
+    height: 22.5vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-text {
+    font-size: 1.2vw;
+    color: red;
+    text-align: center;
+}
+
+/*addPost*/
+#add-post {
+    background: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1vw;
+    line-height: 1;
+    float: left;
+    width: 63%;
+    margin-left: 12%;
+}
+
+.download-photo {
+    display: flex;
+    flex-direction: column;
+}
+
+.download-photo.hide {
+    display: none;
+}
+.button-add-photo {
+    height: 2.2vw;
+    background: rgba(251, 251, 251, 0);
+}
+
+.button-add-photo img {
+    width: 2vw;
+    height: 1.9vw;
+}
+
+.new-photo {
+    width: 25vw;
+    height: 25vw;
+}
+
+.new-photo.image {
+    display: inline-block;
+    width: 95%;
+    height: 30vw;
+    margin: 1.1vw 0 0.3vw;
+}
+
+#newEntry {
+    flex-direction: column;
+    width: 95%;
+    display: flex;
+}
+
+#newEntry input {
+    width: 100%;
+    height: 1.7vw;
+    background-color: rgba(237, 236, 253, 0.33);
+    border-radius: 0;
+    margin: 0.5vw 0 0.3vw;
+}
+
+#button-submit-post {
+    height: 2vw;
+    width: 7vw;
+    font-size: 1.2vw;
+    font-weight: bold;
+    background-color: rgba(237, 236, 253, 0.33);
+    margin: 0.3vw 0 0.5vw;
+}
+
+/*Avatar*/
+.user {
+    display: inline-block;
+    text-align: center;
+    width: 25%;
+}
+
+.user.hide{
+    display: none;
+}
+.big-avatar {
+    background: url("images/user.png");
+    background-size: 100%;
+    display: inline-block;
+    width: 13.5vw;
+    height: 13.5vw;
+    margin: 1.5vw 0 0 0;
+}
+
+.add-post-button {
+    display: inline-block;
+    width: 13vw;
+}
+
+#name {
+    font-weight: bolder;
+    font-size: 1.5vw;
+
+}
+
+#button-add {
+    width: 95%;
+    text-transform: uppercase;
+    display: inline-block;
+    background: #fff;
+    margin: 0.5vw 0 1vw 0;
+    height: 2.5vw;
+    font-size: 1.1vw;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    color: rgba(22, 0, 27, 0.9);
+}
+
+.logo-footer {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.7vw;
+    margin: 0.3vw 0 0.3vw 0;
+}
+
+.footer-icon {
+    background: rgba(235, 233, 242, 0.86);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.vk {
+    background-color: rgba(255, 255, 255, 0);
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.email {
+    background-color: rgba(255, 255, 255, 0);
+    margin: 0 1vw 0 1vw;
+    width: 2.2vw;
+    height: 2.2vw;
+}
+
+.insta {
+    background-color: rgba(255, 255, 255, 0);
+    width: 2vw;
+    height: 2vw;
+}
+
+.data-page {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2vw;
+    background: rgba(235, 233, 242, 0.86);
+}
