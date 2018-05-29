@@ -1,0 +1,17 @@
+[
+  {
+    "id" : "1",
+    "username": "Adamskaya Yuliya",
+    "password": "111111"
+  },
+  {
+    "id" : "2",
+    "username": "Murashko Yuliya",
+    "password": "222222"
+  },
+  {
+    "id" : "3",
+    "username": "Ambrosyonok Marina",
+    "password": "333333"
+  }
+]

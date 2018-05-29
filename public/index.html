@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marshmallows</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="logo">Marshmallows</div>
+    <div class="menu">
+        <a href="index.html" id="home">Home</a>
+        <form id="search-form">
+            <!--1search-->
+            <input name="date" placeholder=" search by date...">
+            <!--2search-->
+            <input name="username" placeholder=" search by name...">
+            <!--3search-->
+            <input name="listHashTags" list="hashTags" placeholder=" search hashTag...">
+            <datalist id="hashTags"></datalist>
+            <button type="submit" id="button-search"><img src="images/search1.png"/></button>
+        </form>
+        <a href="" id="sign-out-sign-in">Sign out</a>
+    </div>
+</header>
+<main>
+    <!--list photoPosts-->
+    <section data-role="list" class="active">
+        <div id="site-content"></div>
+    </section>
+
+    <template id="post-template">
+        <article class="photo-post">
+            <div class="header-post">
+                <div class="information-about-post">
+                    <div class="avatar"></div>
+                    <p class="author"></p>
+                    <span class="date-post"></span>
+                </div>
+                <div class="remove-edit">
+                    <button type="button" data-action="delete" class="btn"><img src="images/delete.png"
+                                                                                class="remove-post"/></button>
+                    <button type="button" data-action="edit" class="btn"><img src="images/edit.png" class="edit-post"/>
+                    </button>
+                </div>
+            </div>
+            <img class="photo" src="">
+            <div class="footer-post">
+                <div class="entry">
+                    <p class="description"></p>
+                    <p class="hashTags"></p>
+                    <div class="users-like">
+                        <p class="number-of-likes"></p>
+                    </div>
+                </div>
+                <div data-action="like" class="like"></div>
+            </div>
+        </article>
+    </template>
+
+    <!--sign in-->
+    <section data-role="sign-in" class="active">
+        <div id="sign-in"></div>
+    </section>
+
+    <template id="registration-form-template">
+        <form id="form-registration">
+            <div class="user-data">
+                <img src="images/userRegistration.png"/>
+                <input name="username" id="username" placeholder=" Имя пользователя...">
+            </div>
+            <div class="user-data">
+                <img src="images/keyRegistration.png"/>
+                <input name="password" id="password" placeholder=" Пароль...">
+            </div>
+            <button type="submit" id="button-registration" value="Sign in">
+                <a href="index.html">Войти</a>
+            </button>
+        </form>
+    </template>
+
+    <!--add photoPosts-->
+    <section data-role="add-post" class="active">
+        <div id="add"></div>
+    </section>
+
+    <template id="add-post-template">
+        <div id="add-post">
+            <img class="new-photo" src="images/downloadImage.png">
+            <form id="newEntry" name="entry">
+                <div class="download-photo">
+                    <p>Загрузить фото:</p>
+                    <input type="file" class="fileInput" accept="image/*">
+                </div>
+                <p>Описание:</p>
+                <input name="description">
+                <p>HashTag:</p>
+                <input name="hashTags">
+            </form>
+            <button id="button-submit-post" type="submit" value="Send">
+                <a href="index.html">Отправить</a>
+            </button>
+        </div>
+    </template>
+
+    <article class="user">
+        <div class="big-avatar"></div>
+        <p id="name"></p>
+        <div class="add-post-button">
+            <button id="button-add"><a>Add post</a></button>
+        </div>
+    </article>
+
+    <div class="download hide">
+        <button type="button" id="button-load">
+            <p>load more...</p>
+        </button>
+    </div>
+
+</main>
+<footer>
+    <div class="logo-footer">Marshmallows</div>
+    <div class="footer-icon">
+        <button type="button" class="vk"><img src="images/vk.png" alt="vk"/></button>
+        <button type="button" class="email"><img src="images/email.png" alt="email"/></button>
+        <button type="button" class="insta"><img src="images/insta.png" alt="instagram"/></button>
+    </div>
+    <p class="data-page">Адамская Юлия 2 курс 6 группа<br>20.05.2018</p>
+</footer>
+<script src="model.js"></script>
+<script src="DOM.js"></script>
+<script src="controller.js"></script>
+</body>
+</html>
+
