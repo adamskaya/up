@@ -2,6 +2,7 @@ const multer = require('multer');
 const express = require('express');
 const actions = require('./server/module.js');
 const bodyParser = require('body-parser');
+//const mongoose = require('mongoose');
 
 const app = express();
 app.use(express.static('public'));
@@ -9,6 +10,60 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+// const router = express.Router();
+const passport = require('passport');
+//const expressSession = require('express-session');
+// app.use(expressSession({
+//     secret: 'secret',
+//     saveUninitialized: true,
+//     resave: true,
+//     // store: new MongoStore({
+//     //     url: 'mongodb://localhost/passport',
+//     // })
+// }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+const JsonStrategy = require('passport-json').Strategy;
+
+passport.use(new JsonStrategy((username, password, done) => {
+    if (username === undefined) {
+        return done(null, false);
+    }
+    const user = actions.getUser(username);
+    if (user.username !== username) {
+        return done(null, false);
+    }
+    if (!actions.validatePassword(password, username)) {
+        return done(null, false);
+    }
+    return done(null, user);
+}));
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    actions.getUserById(id, (error, user) => {
+        done(error, user);
+    });
+});
+
+app.post(
+    '/signIn',
+    passport.authenticate('json', { failureRedirect: '/login' }),
+    (req, res) => {
+        res.redirect('/');
+    }
+);
+
+// app.get('/signOut', (request) => {
+//     request.logout();
+// });
 
 const upload = {
     storage: multer.diskStorage({

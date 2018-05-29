@@ -148,6 +148,32 @@
                     throw error;
                 });
         }
+        signIn(username, password) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/signIn');
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        resolve(xhr.responseText);
+                    } else {
+                        reject(new Error(xhr.statusText));
+                    }
+                };
+                xhr.send(JSON.stringify({
+                    username,
+                    password,
+                }));
+            }).catch((error) => {
+                throw error;
+            });
+        }
+
+        signOut() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/signOut');
+            xhr.send();
+        }
     }
     window.PhotoPostsCollection = PhotoPostsCollection;
     window.Users = Users;

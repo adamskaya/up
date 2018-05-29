@@ -54,6 +54,7 @@
             document.getElementById('name').textContent = username;
         }
     }
+
     function checkNumberPhotoPosts(listPhotoPosts) {
         numberPhotoPostsOnPage = numberPhotoPostsOnPage + listPhotoPosts.length;
         if (listPhotoPosts.length === getNumberPhotoPostsOnPage && model.list.length !== numberPhotoPostsOnPage) {
@@ -62,6 +63,7 @@
             document.querySelector('.download').classList.add('hide');
         }
     }
+
     function onUpdate() {
         addUser();
         const listPhotoPosts = model.getPhotoPosts(numberPhotoPostsOnPage, getNumberPhotoPostsOnPage);
@@ -70,6 +72,7 @@
         addHashTags();
         checkNumberPhotoPosts(listPhotoPosts);
     }
+
     function loadMorePhotoPosts() {
         const listPhotoPosts = model.getPhotoPosts(numberPhotoPostsOnPage, getNumberPhotoPostsOnPage);
         checkNumberPhotoPosts(listPhotoPosts);
@@ -86,17 +89,17 @@
         };
     }
 
-    function handlerRegistrationData() {
+    async function handlerRegistrationData() {
         const formData = getRegistrationData();
         if (formData.username === '') {
-            registrationView.showMessageErrorInData('Данные некорректные!');
+            registrationView.showMessageErrorInData('Данные некорректные! Попробуйте еще.');
             event.preventDefault();
         }
-        if (formData.password === users.findUser(formData.username).password) {
-            localStorage.setItem('user', JSON.stringify(formData.username));
-        } else {
-            registrationView.showMessageErrorInData('Неправильный пароль!');
+        if (formData.password === '') {
+            registrationView.showMessageErrorInData('Данные некорректные! Попробуйте еще.');
             event.preventDefault();
+        } else if (await users.signIn(formData.username, formData.password)) {
+            localStorage.setItem('user', JSON.stringify(formData.username));
         }
     }
 
@@ -110,6 +113,7 @@
             }
         });
     }
+
     function signIn() {
         if (buttonSignIn.textContent === 'Sign in') {
             showView('sign-in');
@@ -124,6 +128,7 @@
             event.preventDefault();
         }
     }
+
     function parseHashTags(stringOfHashTags) {
         let hashTag = '';
         const listHashTags = [];
@@ -182,6 +187,7 @@
         postForm.querySelector('[name="description"]').value = post ? post.description : '';
         postForm.querySelector('[name="hashTags"]').value = post ? post.hashTags : '';
     }
+
     async function onPostEdit(id) {
         const post = model.getPhotoPost(id);
         showView('add-post');
@@ -238,10 +244,12 @@
             postView.querySelector('.number-of-likes').textContent = 'Likes: ' + post.likes.length;
         }
     }
+
     async function onPostDelete(id) {
         listView.removePost(id);
         await model.removePhotoPost(id);
     }
+
     function onItemClick(event) {
         const target = event.target.closest('[data-action]');
         if (target) {
@@ -256,19 +264,21 @@
                 case 'like':
                     onPostLike(post.dataset.id);
                     break;
-                default: break;
+                default:
+                    break;
             }
             event.preventDefault();
         }
     }
+
     function getFilterData() {
-        const username = JSON.parse(localStorage.getItem('user'));
         const searchForm = document.getElementById('search-form');
         const searchFormData = new FormData(searchForm);
+        const name = searchFormData.get('username');
         const date = searchFormData.get('date');
         const filterHashTags = searchFormData.get('listHashTags');
         return {
-            author: username,
+            author: name,
             createdAt: date,
             hashTags: filterHashTags
         };
@@ -276,7 +286,7 @@
 
     function onPostFormSubmit() {
         const formData = getFilterData();
-        const filteredPosts = model.getPhotoPosts(0, 10, formData);
+        const filteredPosts = model.getPhotoPosts(0, model.list.length, formData);
         numberPhotoPostsOnPage = 0;
         if (filteredPosts.length) {
             listView.clearPage();
@@ -305,6 +315,7 @@
         onUpdate();
         bindEvents();
     }
+
     // ================= INIT ======================
     load();
 })();

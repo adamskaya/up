@@ -6,12 +6,25 @@ const users = JSON.parse(fs.readFileSync('./server/data/users.json'));
 function compareDate(a, b) {
     return new Date(b.createdAt) - new Date(a.createdAt);
 }
+
 const actions = {
 
+    getUser(username) {
+        return users.find(element => element.username === username);
+    },
+    getUserById(id) {
+        return users.find(element => element.id === id).id;
+    },
     getPhotoPost(id) {
         return posts.find(element => element.id === id);
     },
-
+    validatePassword(password, username) {
+        const user = users.find(element => element.username === username);
+        if (user.password === password) {
+            return true;
+        }
+        return false;
+    },
     getUsers() {
         return users;
     },
